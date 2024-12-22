@@ -1,206 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-8WE9Y013NK"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-8WE9Y013NK");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>⚠️ INFECTED - F4D3D0X99</title>
     <script>
-        const hackTitles = [
-            "⚠️ INFECTED - F4D3D0X99",
-            "☠️ ROOT:// F4D3D0X99",
-            "⚡ BREACHED - F4D3D0X99",
-            "💀 PWNED:// F4D3D0X99"
-        ];
-        
-        let titleIndex = 0;
-        setInterval(() => {
-            document.title = hackTitles[titleIndex];
-            titleIndex = (titleIndex + 1) % hackTitles.length;
-        }, 1500);
+      const hackTitles = [
+        "⚠️ INFECTED - F4D3D0X99",
+        "☠️ ROOT:// F4D3D0X99",
+        "⚡ BREACHED - F4D3D0X99",
+        "💀 PWNED:// F4D3D0X99",
+      ];
+
+      let titleIndex = 0;
+      setInterval(() => {
+        document.title = hackTitles[titleIndex];
+        titleIndex = (titleIndex + 1) % hackTitles.length;
+      }, 1500);
     </script>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Press+Start+2P"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <div class="matrix-container">
-        <canvas id="matrix-rain"></canvas>
-        <div class="noise"></div>
-        <div class="overlay"></div>
+      <canvas id="matrix-rain"></canvas>
+      <div class="noise"></div>
+      <div class="overlay"></div>
     </div>
 
     <div id="scanner-container" class="scanner-container">
-        <div class="scanner-prompt">
-            <div class="scan-messages">
-                <div class="scan-status">Don't be scared, I won't bite! 😈</div>
-            </div>
-            
-            <div class="scan-progress">
-                <div class="progress-text glitch-text" data-text="0%">0%</div>
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
-                </div>
-            </div>
-
-            <div class="fingerprint-scanner">
-                <div class="scanner-arrows">
-                    <div class="arrow-container left">
-                        <div class="arrow">>></div>
-                        <div class="arrow">>></div>
-                        <div class="arrow">>></div>
-                    </div>
-                    <div class="arrow-container right">
-                        <div class="arrow"><<</div>
-                        <div class="arrow"><<</div>
-                        <div class="arrow"><<</div>
-                    </div>
-                </div>
-                <div class="scan-line"></div>
-                <div class="scan-glow"></div>
-                <svg class="fingerprint-svg" viewBox="0 0 100 100">
-                    <defs>
-                        <pattern id="fingerprint-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                            <path d="M0,10 Q5,0 10,10 T20,10" fill="none" stroke="currentColor" stroke-width="0.5"/>
-                            <path d="M0,5 Q5,-5 10,5 T20,5" fill="none" stroke="currentColor" stroke-width="0.5"/>
-                            <path d="M0,15 Q5,5 10,15 T20,15" fill="none" stroke="currentColor" stroke-width="0.5"/>
-                        </pattern>
-                    </defs>
-                    <circle class="fingerprint-base" cx="50" cy="50" r="40"/>
-                    <g class="fingerprint-lines">
-                        <path d="M30,50 Q50,20 70,50"/>
-                        <path d="M25,50 Q50,10 75,50"/>
-                        <path d="M35,50 Q50,30 65,50"/>
-                        <path d="M40,50 Q50,40 60,50"/>
-                        <path d="M30,55 Q50,25 70,55"/>
-                        <path d="M25,60 Q50,15 75,60"/>
-                        <path d="M35,65 Q50,35 65,65"/>
-                        <path d="M40,70 Q50,45 60,70"/>
-                    </g>
-                </svg>
-            </div>
-
-            <div class="scan-text">
-                <div class="shimmer-text">Enter your fingerprint to get access to</div>
-                <div class="faded-text">fadedhood</div>
-            </div>
+      <div class="scanner-prompt">
+        <div class="scan-messages">
+          <div class="scan-status">Don't be scared, I won't bite! 😈</div>
         </div>
 
-        <div class="fingerprint-burst hidden">
-            <div class="burst-container"></div>
+        <div class="scan-progress">
+          <div class="progress-text glitch-text" data-text="0%">0%</div>
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
+          </div>
         </div>
+
+        <div class="fingerprint-scanner">
+          <div class="scanner-arrows">
+            <div class="arrow-container left">
+              <div class="arrow">>></div>
+              <div class="arrow">>></div>
+              <div class="arrow">>></div>
+            </div>
+            <div class="arrow-container right">
+              <div class="arrow"><<</div>
+              <div class="arrow"><<</div>
+              <div class="arrow"><<</div>
+            </div>
+          </div>
+          <div class="scan-line"></div>
+          <div class="scan-glow"></div>
+          <svg class="fingerprint-svg" viewBox="0 0 100 100">
+            <defs>
+              <pattern
+                id="fingerprint-pattern"
+                x="0"
+                y="0"
+                width="20"
+                height="20"
+                patternUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M0,10 Q5,0 10,10 T20,10"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="0.5"
+                />
+                <path
+                  d="M0,5 Q5,-5 10,5 T20,5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="0.5"
+                />
+                <path
+                  d="M0,15 Q5,5 10,15 T20,15"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="0.5"
+                />
+              </pattern>
+            </defs>
+            <circle class="fingerprint-base" cx="50" cy="50" r="40" />
+            <g class="fingerprint-lines">
+              <path d="M30,50 Q50,20 70,50" />
+              <path d="M25,50 Q50,10 75,50" />
+              <path d="M35,50 Q50,30 65,50" />
+              <path d="M40,50 Q50,40 60,50" />
+              <path d="M30,55 Q50,25 70,55" />
+              <path d="M25,60 Q50,15 75,60" />
+              <path d="M35,65 Q50,35 65,65" />
+              <path d="M40,70 Q50,45 60,70" />
+            </g>
+          </svg>
+        </div>
+
+        <div class="scan-text">
+          <div class="shimmer-text">
+            Enter your fingerprint to get access to
+          </div>
+          <div class="faded-text">fadedhood</div>
+        </div>
+      </div>
+
+      <div class="fingerprint-burst hidden">
+        <div class="burst-container"></div>
+      </div>
     </div>
 
     <div class="fingerprint-success hidden">
-        <div class="success-lines"></div>
+      <div class="success-lines"></div>
     </div>
 
     <div class="container hidden" id="main-container">
-        <div class="header">
-            <div class="avatar-container">
-                <img src="1.png" alt="Faded0x99" class="avatar">
-                <div class="avatar-shimmer"></div>
-            </div>
-            <div class="title-section">
-                <div class="glitch-title" data-text="SYSTEM INFECTED"> 👻SYSTEM INFECTED👻</div>
-                <div class="sub-text"><span class="by-text">by</span> <a href="#" class="dev-link hacker-name">F4d3d0x99</a></div>
-            </div>
+      <div class="header">
+        <div class="avatar-container">
+          <img src="1.png" alt="Faded0x99" class="avatar" />
+          <div class="avatar-shimmer"></div>
         </div>
+        <div class="title-section">
+          <div class="glitch-title" data-text="SYSTEM INFECTED">
+            👻SYSTEM INFECTED👻
+          </div>
+          <div class="sub-text">
+            <span class="by-text">by</span>
+            <a href="#" class="dev-link hacker-name">F4d3d0x99</a>
+          </div>
+        </div>
+      </div>
 
-        <div class="visitor-info">
-            <div class="info-section">
-                <h3 class="section-title">👾 Target System Analysis</h3>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label">IP Address</div>
-                        <div class="info-value-container">
-                            <div class="info-value" id="ipAddress">Scanning...</div>
-                            <span class="reveal-icon material-icons" id="ipRevealIcon">visibility_off</span>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Location</div>
-                        <div class="info-value-container">
-                            <div class="info-value" id="locationInfo">Analyzing...</div>
-                            <span class="reveal-icon material-icons" id="locationRevealIcon">visibility_off</span>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Browser</div>
-                        <div class="info-value" id="browserInfo">Detecting...</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">System</div>
-                        <div class="info-value" id="systemInfo">Analyzing...</div>
-                    </div>
-                </div>
+      <div class="visitor-info">
+        <div class="info-section">
+          <h3 class="section-title">👾 Target System Analysis</h3>
+          <div class="info-grid">
+            <div class="info-item">
+              <div class="info-label">IP Address</div>
+              <div class="info-value-container">
+                <div class="info-value" id="ipAddress">Scanning...</div>
+                <span class="reveal-icon material-icons" id="ipRevealIcon"
+                  >visibility_off</span
+                >
+              </div>
             </div>
-        </div>
-
-        <div class="terminal-section">
-            <div class="terminal">
-                <div class="terminal-header">
-                    <div class="terminal-buttons">
-                        <span class="terminal-btn close"></span>
-                        <span class="terminal-btn minimize"></span>
-                        <span class="terminal-btn maximize"></span>
-                    </div>
-                    <span class="terminal-title">f4d3d@r00t:~#</span>
-                </div>
-                <div class="terminal-content" id="terminalOutput"></div>
+            <div class="info-item">
+              <div class="info-label">Location</div>
+              <div class="info-value-container">
+                <div class="info-value" id="locationInfo">Analyzing...</div>
+                <span class="reveal-icon material-icons" id="locationRevealIcon"
+                  >visibility_off</span
+                >
+              </div>
             </div>
+            <div class="info-item">
+              <div class="info-label">Browser</div>
+              <div class="info-value" id="browserInfo">Detecting...</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">System</div>
+              <div class="info-value" id="systemInfo">Analyzing...</div>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <div class="warning-message">
-            <p class="warning-title">⚠️ DISCLAIMER ⚠️</p>
-            <p class="warning-text">Your data has been collected for... uhm... "educational purposes" 😏</p>
-            <p class="warning-subtext">Sorry not sorry! Just showing what any website can see 🤷‍♂️</p>
-            <!-- <p class="access-status">ACCESS GRANTED</p> -->
-            <p class="hex-binary" id="hexBinaryText"></p>
+      <div class="terminal-section">
+        <div class="terminal">
+          <div class="terminal-header">
+            <div class="terminal-buttons">
+              <span class="terminal-btn close"></span>
+              <span class="terminal-btn minimize"></span>
+              <span class="terminal-btn maximize"></span>
+            </div>
+            <span class="terminal-title">f4d3d@r00t:~#</span>
+          </div>
+          <div class="terminal-content" id="terminalOutput"></div>
         </div>
+      </div>
+
+      <div class="warning-message">
+        <p class="warning-title">⚠️ DISCLAIMER ⚠️</p>
+        <p class="warning-text">
+          Your data has been collected for... uhm... "educational purposes" 😏
+        </p>
+        <p class="warning-subtext">
+          Sorry not sorry! Just showing what any website can see 🤷‍♂️
+        </p>
+        <!-- <p class="access-status">ACCESS GRANTED</p> -->
+        <p class="hex-binary" id="hexBinaryText"></p>
+      </div>
     </div>
 
     <div class="footer">
-        <div class="footer-text">
-            <div>Made</div>
-            <div>with</div>
-        </div>
-        <span class="heart">🖤</span> <span>by</span> <a href="#" class="dev-link">F4d3d</a>
+      <div class="footer-text">
+        <div>Made</div>
+        <div>with</div>
+      </div>
+      <span class="heart">🖤</span> <span>by</span>
+      <a href="#" class="dev-link">F4d3d</a>
     </div>
 
     <div class="dev-dialog-overlay"></div>
     <div class="dev-dialog">
-        <div class="dialog-header">
-            <h3>Visit Developer's GitHub</h3>
-            <button class="close-btn">&times;</button>
-        </div>
-        <p>Ready to explore the mind behind this creation? 🚀</p>
-        <button class="dev-dialog-btn">Take me there >>></button>
+      <div class="dialog-header">
+        <h3>Visit Developer's GitHub</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <p>Ready to explore the mind behind this creation? 🚀</p>
+      <button class="dev-dialog-btn">Take me there >>></button>
     </div>
 
     <div class="custom-context-menu">
-        <div class="context-menu-item" data-action="hack">
-            <span class="icon">💀</span>
-            <span class="text">Attempt to hack (Good luck!)</span>
-        </div>
-        <div class="context-menu-item" data-action="inspect">
-            <span class="icon">🔍</span>
-            <span class="text">Inspect (Nothing to see here)</span>
-        </div>
-        <div class="context-menu-item" data-action="copy">
-            <span class="icon">📋</span>
-            <span class="text">Copy (Like you'd need this)</span>
-        </div>
-        <div class="context-menu-item" data-action="report">
-            <span class="icon">⚠️</span>
-            <span class="text">Report bug (It's not a bug, it's a feature)</span>
-        </div>
-        <div class="context-menu-item" data-action="exit">
-            <span class="icon">🚪</span>
-            <span class="text">Exit (You can't escape)</span>
-        </div>
+      <div class="context-menu-item" data-action="hack">
+        <span class="icon">💀</span>
+        <span class="text">Attempt to hack (Good luck!)</span>
+      </div>
+      <div class="context-menu-item" data-action="inspect">
+        <span class="icon">🔍</span>
+        <span class="text">Inspect (Nothing to see here)</span>
+      </div>
+      <div class="context-menu-item" data-action="copy">
+        <span class="icon">📋</span>
+        <span class="text">Copy (Like you'd need this)</span>
+      </div>
+      <div class="context-menu-item" data-action="report">
+        <span class="icon">⚠️</span>
+        <span class="text">Report bug (It's not a bug, it's a feature)</span>
+      </div>
+      <div class="context-menu-item" data-action="exit">
+        <span class="icon">🚪</span>
+        <span class="text">Exit (You can't escape)</span>
+      </div>
     </div>
 
     <script src="matrix.js"></script>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
