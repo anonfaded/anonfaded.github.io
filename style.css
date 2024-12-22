@@ -423,6 +423,11 @@ body::-webkit-scrollbar-thumb {
     animation: burstLine 0.8s ease-out forwards;
 }
 
+.dialog-header h3 {
+    color: #ff0000;
+    text-shadow: 0 0 10px #ff0000;
+}
+
 .dev-dialog-overlay {
     position: fixed;
     top: 0;
@@ -430,11 +435,11 @@ body::-webkit-scrollbar-thumb {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(5px);
+    z-index: 9998;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
-    z-index: 9998;
 }
 
 .dev-dialog-overlay.active {
@@ -443,54 +448,114 @@ body::-webkit-scrollbar-thumb {
 }
 
 .dev-dialog {
+    background: rgba(0, 0, 0, 0.95);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.9);
-    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    min-width: 300px;
     border: 1px solid rgba(255, 0, 0, 0.3);
-    border-radius: 10px;
-    padding: 15px;
-    text-align: center;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.3),
+                0 0 30px rgba(255, 0, 0, 0.2),
+                0 0 45px rgba(255, 0, 0, 0.1);
+    animation: dialogGlow 2s infinite alternate;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
-    z-index: 9999;
-    max-width: 90%;
-    width: 280px;
 }
 
 .dev-dialog.active {
-    transform: translate(-50%, -50%) scale(1);
     opacity: 1;
     visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+@keyframes dialogGlow {
+    0% {
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.3),
+                    0 0 30px rgba(255, 0, 0, 0.2),
+                    0 0 45px rgba(255, 0, 0, 0.1);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.4),
+                    0 0 40px rgba(255, 0, 0, 0.3),
+                    0 0 60px rgba(255, 0, 0, 0.2);
+    }
 }
 
 .dialog-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 15px;
+    position: relative;
+}
+
+.dialog-header h3 {
+    color: #ff0000;
+    text-shadow: 0 0 10px #ff0000;
+    font-size: 1.2em;
+    margin: 0;
+    animation: headerPulse 2s infinite alternate;
+}
+
+@keyframes headerPulse {
+    0% {
+        text-shadow: 0 0 10px #ff0000;
+    }
+    100% {
+        text-shadow: 0 0 20px #ff0000,
+                     0 0 30px #ff0000;
+    }
+}
+
+.dev-dialog p {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+
+.dev-dialog-btn {
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.4);
+    color: #ff0000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-shadow: 0 0 5px #ff0000;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+}
+
+.dev-dialog-btn:hover {
+    background: rgba(255, 0, 0, 0.2);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+    transform: translateY(-2px);
+    text-shadow: 0 0 10px #ff0000;
 }
 
 .close-btn {
+    position: absolute;
+    right: -10px;
+    top: -10px;
     background: none;
     border: none;
     color: #ff0000;
     font-size: 1.5em;
     cursor: pointer;
-    padding: 0;
-    line-height: 1;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    padding: 5px;
+    text-shadow: 0 0 5px #ff0000;
+    transition: all 0.3s ease;
 }
 
 .close-btn:hover {
-    opacity: 1;
-    text-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+    text-shadow: 0 0 10px #ff0000;
+    transform: scale(1.1);
 }
 
 .warning-message {
