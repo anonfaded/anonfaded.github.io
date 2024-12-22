@@ -3,84 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System Compromised - Faded0x99</title>
+    <title>System Infected - Faded0x99</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-    <canvas id="matrix-rain"></canvas>
-    <div class="noise"></div>
-    <div class="overlay"></div>
-    
-    <div class="container">
-        <div class="system-info">
-            <div class="info-grid" id="systemInfo">
-                <div class="info-item">
-                    <span class="info-label">Target IP:</span>
-                    <span class="info-value" id="ipAddress">**.**.**.***</span>
+    <div class="matrix-container">
+        <canvas id="matrix-rain"></canvas>
+        <div class="noise"></div>
+        <div class="overlay"></div>
+    </div>
+
+    <div id="scanner-container" class="scanner-container">
+        <div class="scanner-prompt">
+            <div class="fingerprint-scanner">
+                <div class="scan-progress">
+                    <div class="progress-ring">
+                        <svg>
+                            <circle class="progress-ring-circle" cx="50%" cy="50%" r="45%"/>
+                        </svg>
+                        <div class="progress-text">0%</div>
+                    </div>
                 </div>
-                <div class="info-item">
-                    <span class="info-label">System:</span>
-                    <span class="info-value" id="osInfo">Loading...</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Browser:</span>
-                    <span class="info-value" id="browserInfo">Loading...</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Display:</span>
-                    <span class="info-value" id="screenInfo">Loading...</span>
-                </div>
+                <svg class="fingerprint-svg" viewBox="0 0 100 100">
+                    <circle class="scanner-ring" cx="50" cy="50" r="45"/>
+                    <path class="fingerprint-path" d="M50,10 C25,10 10,25 10,50 C10,75 25,90 50,90 C75,90 90,75 90,50 C90,25 75,10 50,10 Z"/>
+                    <path class="fingerprint-path" d="M50,20 C30,20 20,30 20,50 C20,70 30,80 50,80 C70,80 80,70 80,50 C80,30 70,20 50,20 Z"/>
+                    <path class="fingerprint-path" d="M50,30 C35,30 30,35 30,50 C30,65 35,70 50,70 C65,70 70,65 70,50 C70,35 65,30 50,30 Z"/>
+                    <path class="fingerprint-path" d="M50,40 C40,40 40,40 40,50 C40,60 40,60 50,60 C60,60 60,60 60,50 C60,40 60,40 50,40 Z"/>
+                    <path class="fingerprint-line" d="M30,50 C40,30 60,30 70,50"/>
+                    <path class="fingerprint-line" d="M25,50 C35,25 65,25 75,50"/>
+                    <path class="fingerprint-line" d="M35,50 C45,35 55,35 65,50"/>
+                </svg>
+                <div class="scan-line"></div>
+            </div>
+            <div class="scan-text">Place Finger to Begin</div>
+            <div class="scan-status">Don't be scared, I won't bite! 😈</div>
+            <div class="scan-error hidden">Whoops! Getting cold feet? 🥶</div>
+        </div>
+    </div>
+
+    <div class="fingerprint-success hidden">
+        <div class="success-lines"></div>
+    </div>
+
+    <div class="container hidden" id="main-container">
+        <div class="header">
+            <img src="1.png" alt="Faded0x99" class="avatar">
+            <div class="title">
+                <div class="glitch" data-text="SYSTEM INFECTED">SYSTEM INFECTED</div>
+                <div class="sub-text">by <span class="hacker-name">Faded0x99</span></div>
             </div>
         </div>
 
-        <div class="breach-progress">
-            <div class="progress-wrapper">
-                <div id="processLog" class="process-log"></div>
-                <div class="progress-bar">
-                    <div class="progress" id="mainProgress"></div>
-                </div>
-                <div class="progress-status" id="progressStatus">Initializing Attack Vectors...</div>
-            </div>
-        </div>
-
-        <div class="main-content">
-            <div class="glitch-wrapper">
-                <div class="glitch" data-text="SYSTEM COMPROMISED">SYSTEM COMPROMISED</div>
-            </div>
-            
-            <div class="hacker-image">
-                <img src="1.png" alt="Faded0x99 Logo" class="avatar">
-                <div class="avatar-overlay"></div>
-            </div>
-            
-            <div class="message">
-                <div class="typing-text">System successfully hijacked by</div>
-                <h1 class="hacker-name">Faded0x99</h1>
-                <div class="status-container">
-                    <p class="blink-text">[ROOT ACCESS GRANTED]</p>
-                    <div id="hackStats" class="hack-stats">
-                        <div class="stat">Files Encrypted: <span id="encryptedCount">0</span></div>
-                        <div class="stat">Backdoors: <span id="backdoorCount">0</span></div>
-                        <div class="stat">Time Elapsed: <span id="timeElapsed">00:00</span></div>
+        <div class="visitor-info">
+            <div class="info-section">
+                <h3 class="section-title">🎯 Target Acquired</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">IP Address:</span>
+                        <span class="info-value" id="ipAddress">Scanning...</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Location:</span>
+                        <span class="info-value" id="locationInfo">Analyzing...</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Browser:</span>
+                        <span class="info-value" id="browserInfo">Detecting...</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">System:</span>
+                        <span class="info-value" id="systemInfo">Analyzing...</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="data-stream">
-            <div class="data-row" id="dataStream"></div>
-        </div>
-    </div>
-
-    <div class="terminal">
-        <div class="terminal-header">
-            <span class="terminal-title">faded0x99@target:~# </span>
-            <div class="terminal-buttons">
-                <span></span><span></span><span></span>
+        <div class="terminal">
+            <div class="terminal-header">
+                <span class="terminal-title">faded0x99@visitor:~# </span>
+                <div class="terminal-buttons">
+                    <span></span><span></span><span></span>
+                </div>
             </div>
+            <div class="terminal-content" id="terminalOutput"></div>
         </div>
-        <div class="terminal-content" id="terminalOutput"></div>
+
+        <div class="warning-message">
+            <p class="warning-title">⚠️ DISCLAIMER ⚠️</p>
+            <p class="warning-text">Your data has been collected for... uhm... "educational purposes" 😏</p>
+            <p class="warning-subtext">Sorry not sorry! Just showing what any website can see 🤷‍♂️</p>
+            <p class="joke" id="randomJoke">Loading dad joke...</p>
+        </div>
     </div>
 
     <script src="matrix.js"></script>
