@@ -208,113 +208,79 @@ document.addEventListener('DOMContentLoaded', () => {
         getRandomDadJoke();
     }
 
-    function addTerminalLine(text, type = '') {
-        const terminal = document.getElementById('terminalOutput');
-        const line = document.createElement('div');
-        line.className = `terminal-line ${type}`;
-        line.textContent = text;
-        terminal.appendChild(line);
-        terminal.scrollTop = terminal.scrollHeight;
-    }
+    function initializeDialogs() {
+        // Add click handlers for both dev links
+        document.querySelectorAll('.dev-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector('.dev-dialog-overlay').classList.add('active');
+                document.querySelector('.dev-dialog').classList.add('active');
+            });
+        });
 
-    function typeTerminalText(text, type = '') {
-        return new Promise((resolve) => {
-            let index = 0;
-            let speed = Math.random() * 20 + 20; // Random speed between 20ms and 40ms
-            
-            const interval = setInterval(() => {
-                if (index === 0) {
-                    addTerminalLine('', type);
-                }
-                
-                const currentLine = document.querySelector('.terminal-line:last-child');
-                currentLine.textContent += text[index];
-                
-                // Auto scroll
-                const terminal = document.getElementById('terminalOutput');
-                terminal.scrollTop = terminal.scrollHeight;
-                
-                index++;
-                
-                // Add random pauses
-                if (text[index] === '.' || text[index] === '!' || text[index] === '?') {
-                    speed = Math.random() * 200 + 100; // Longer pause for punctuation
-                } else {
-                    speed = Math.random() * 20 + 20; // Normal typing speed
-                }
-                
-                if (index >= text.length) {
-                    clearInterval(interval);
-                    setTimeout(resolve, 100); // Small pause after line completion
-                }
-            }, speed);
+        // Close dialog handlers
+        document.querySelector('.close-btn').addEventListener('click', closeDialog);
+        document.querySelector('.dev-dialog-overlay').addEventListener('click', closeDialog);
+        document.querySelector('.dev-dialog-btn').addEventListener('click', function() {
+            window.open('https://github.com/anonfaded', '_blank');
+            closeDialog();
         });
     }
-
-    function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    // Dialog functionality
-    document.querySelector('.dev-link').addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector('.dev-dialog-overlay').classList.add('active');
-        document.querySelector('.dev-dialog').classList.add('active');
-    });
-
-    document.querySelector('.dev-dialog-btn').addEventListener('click', function() {
-        window.open('https://github.com/anonfaded', '_blank');
-        closeDialog();
-    });
-
-    document.querySelector('.close-btn').addEventListener('click', closeDialog);
-    document.querySelector('.dev-dialog-overlay').addEventListener('click', closeDialog);
 
     function closeDialog() {
         document.querySelector('.dev-dialog-overlay').classList.remove('active');
         document.querySelector('.dev-dialog').classList.remove('active');
     }
 
-    // Terminal functionality
-    function addToTerminal(text, delay = 50) {
-        const terminal = document.getElementById('terminal-content');
-        const lines = text.split('\n');
-        let i = 0;
+    async function typeTerminalText(text, type = '') {
+        const terminal = document.getElementById('terminalOutput');
+        const line = document.createElement('div');
+        line.className = `terminal-line ${type}`;
+        terminal.appendChild(line);
 
-        function addLine() {
-            if (i < lines.length) {
-                const line = document.createElement('div');
-                line.textContent = lines[i];
-                terminal.appendChild(line);
+        const cursor = document.createElement('span');
+        cursor.className = 'cursor';
+        line.appendChild(cursor);
+
+        // Split text into words
+        const words = text.split(' ');
+        let currentPosition = 0;
+
+        for (let i = 0; i < words.length; i++) {
+            const word = words[i] + ' ';
+            
+            // Random number of words to print at once (1-3)
+            const wordsAtOnce = Math.min(Math.floor(Math.random() * 3) + 1, words.length - i);
+            const wordGroup = words.slice(i, i + wordsAtOnce).join(' ') + ' ';
+            i += wordsAtOnce - 1; // Skip the words we've grouped
+
+            // Type each character in the word group
+            for (let char of wordGroup) {
+                line.insertBefore(document.createTextNode(char), cursor);
+                currentPosition++;
+                
+                // Ensure terminal scrolls to show new text
                 terminal.scrollTop = terminal.scrollHeight;
-                i++;
-                setTimeout(addLine, delay);
+                
+                // Faster typing with small random variations
+                await sleep(Math.random() * 10 + 5);
+            }
+
+            // Add random pauses between word groups
+            if (i < words.length - 1) {
+                const pauseTime = Math.random() * 50 + 20;
+                await sleep(pauseTime);
             }
         }
 
-        addLine();
+        // Remove cursor after typing is complete
+        line.removeChild(cursor);
+        await sleep(50);
     }
 
-    // Example terminal content
-    const terminalText = `[*] Initializing system scan...
-[+] Accessing target device...
-[+] Collecting system information...
-[+] Analyzing browser data...
-[+] Scanning network ports...
-[*] Target information acquired successfully
-[>] Running security protocols...
-[>] Establishing secure connection...
-[✓] Access granted`;
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
-    // Add interactive elements suggestions:
-    // 1. Matrix rain effect on hover over certain elements
-    // 2. Interactive terminal where users can type basic commands
-    // 3. Easter eggs in the console
-    // 4. Hidden keyboard shortcuts
-    // 5. "Hack attempt" mini-game
-    // 6. Glitch effects on images
-    // 7. Secret morse code messages
-    // 8. Hidden QR codes
-    // 9. Interactive 3D elements
-    // 10. Voice command easter eggs
+    initializeDialogs();
 });
