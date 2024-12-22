@@ -171,41 +171,86 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function startHacking() {
         const commands = [
-            { text: '> Initializing system breach...', delay: 1000 },
-            { text: '> Bypassing security protocols...', delay: 800 },
-            { text: '> Accessing network configuration...', delay: 1000 },
-            { text: '> Intercepting data streams...', delay: 800 },
-            { text: '> Scanning for vulnerabilities...', delay: 1000 },
-            { text: '> Target system identified!', delay: 500 }
+            { text: '> Initializing system breach...', delay: 100 }, 
+            { text: '> Bypassing security protocols...', delay: 100 }, 
+            { text: '> Accessing network configuration...', delay: 100 }, 
+            { text: '> Intercepting data streams...', delay: 167 },  
+            { text: '> Scanning for vulnerabilities...', delay: 100 }, 
+            { text: '> Target system identified!', delay: 100 } 
         ];
 
         for (const cmd of commands) {
-            await typeTerminalText(cmd.text, 'info');
+            await typeTextToTerminal(cmd.text, 'info');
             await sleep(cmd.delay);
         }
 
         const visitorInfo = await getVisitorInfo();
-        await sleep(500);
+        await sleep(167); 
         
         if (visitorInfo) {
-            await typeTerminalText(`> IP Address located: ${maskIP(visitorInfo.ip)}`, 'success');
-            await sleep(300);
-            await typeTerminalText(`> Location triangulated: ${maskLocation(visitorInfo.location.city, visitorInfo.location.country_name)}`, 'success');
-            await sleep(300);
+            await typeTextToTerminal(`> IP Address located: ${maskIP(visitorInfo.ip)}`, 'success');
+            await sleep(100); 
+            await typeTextToTerminal(`> Location triangulated: ${maskLocation(visitorInfo.location.city, visitorInfo.location.country_name)}`, 'success');
+            await sleep(100); 
         }
         
-        await typeTerminalText('> Analyzing system environment...', 'info');
-        await sleep(500);
+        await typeTextToTerminal('> Analyzing system environment...', 'info');
+        await sleep(167); 
         
-        await typeTerminalText(`> Browser fingerprint: ${navigator.userAgent}`, 'error');
-        await sleep(300);
-        await typeTerminalText(`> Operating system: ${navigator.platform}`, 'error');
-        await sleep(300);
-        await typeTerminalText(`> System language: ${navigator.language}`, 'error');
-        await sleep(500);
+        await typeTextToTerminal(`> Browser fingerprint: ${navigator.userAgent}`, 'error');
+        await sleep(100); 
+        await typeTextToTerminal(`> Operating system: ${navigator.platform}`, 'error');
+        await sleep(100); 
+        await typeTextToTerminal(`> System language: ${navigator.language}`, 'error');
+        await sleep(167); 
         
-        await typeTerminalText('> Hack complete! System compromised! 😈', 'warning');
+        await typeTextToTerminal('> Hack complete! System compromised! 😈', 'warning');
         getRandomDadJoke();
+    }
+
+    async function typeTextToTerminal(text, className = '') {
+        const terminal = document.getElementById('terminalOutput');
+        const line = document.createElement('div');
+        line.className = `terminal-line ${className}`;
+        terminal.appendChild(line);
+
+        const cursor = document.createElement('span');
+        cursor.className = 'cursor';
+        line.appendChild(cursor);
+
+        // Split text into words
+        const words = text.split(' ');
+        let currentPosition = 0;
+
+        for (let i = 0; i < words.length; i++) {
+            const word = words[i] + ' ';
+            
+            // Increased words printed at once for faster effect (2-5 words)
+            const wordsAtOnce = Math.min(Math.floor(Math.random() * 4) + 2, words.length - i);
+            const wordGroup = words.slice(i, i + wordsAtOnce).join(' ') + ' ';
+            i += wordsAtOnce - 1; // Skip the words we've grouped
+
+            // Type each character in the word group
+            for (let char of wordGroup) {
+                line.insertBefore(document.createTextNode(char), cursor);
+                currentPosition++;
+                
+                // Ensure terminal scrolls to show new text
+                terminal.scrollTop = terminal.scrollHeight;
+                
+                // Super fast typing (almost instant)
+                await sleep(Math.random() * 0.5 + 0.2);
+            }
+
+            // Keep small pause between word groups
+            if (i < words.length - 1) {
+                await sleep(Math.random() * 7 + 3);
+            }
+        }
+
+        // Remove cursor after typing is complete
+        line.removeChild(cursor);
+        await sleep(7);
     }
 
     function initializeDialogs() {
@@ -230,52 +275,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeDialog() {
         document.querySelector('.dev-dialog-overlay').classList.remove('active');
         document.querySelector('.dev-dialog').classList.remove('active');
-    }
-
-    async function typeTerminalText(text, type = '') {
-        const terminal = document.getElementById('terminalOutput');
-        const line = document.createElement('div');
-        line.className = `terminal-line ${type}`;
-        terminal.appendChild(line);
-
-        const cursor = document.createElement('span');
-        cursor.className = 'cursor';
-        line.appendChild(cursor);
-
-        // Split text into words
-        const words = text.split(' ');
-        let currentPosition = 0;
-
-        for (let i = 0; i < words.length; i++) {
-            const word = words[i] + ' ';
-            
-            // Random number of words to print at once (1-3)
-            const wordsAtOnce = Math.min(Math.floor(Math.random() * 3) + 1, words.length - i);
-            const wordGroup = words.slice(i, i + wordsAtOnce).join(' ') + ' ';
-            i += wordsAtOnce - 1; // Skip the words we've grouped
-
-            // Type each character in the word group
-            for (let char of wordGroup) {
-                line.insertBefore(document.createTextNode(char), cursor);
-                currentPosition++;
-                
-                // Ensure terminal scrolls to show new text
-                terminal.scrollTop = terminal.scrollHeight;
-                
-                // Faster typing with small random variations
-                await sleep(Math.random() * 10 + 5);
-            }
-
-            // Add random pauses between word groups
-            if (i < words.length - 1) {
-                const pauseTime = Math.random() * 50 + 20;
-                await sleep(pauseTime);
-            }
-        }
-
-        // Remove cursor after typing is complete
-        line.removeChild(cursor);
-        await sleep(50);
     }
 
     function sleep(ms) {

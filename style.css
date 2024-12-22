@@ -454,64 +454,113 @@ body::-webkit-scrollbar-thumb {
     margin-bottom: 30px;
 }
 
-.title {
-    margin-top: 20px;
+.title-section {
+    max-width: 600px;
+    margin: 20px auto 0;
+    padding: 0 20px;
 }
 
-.glitch {
+.glitch-title {
     font-family: 'Rubik Glitch', system-ui;
     font-size: 2.8em;
     font-weight: bold;
     color: #ff0000;
-    text-shadow: 2px 2px 0 #00ff00, -2px -2px 0 #0000ff;
+    text-shadow: 2px 2px 0 #000;
     position: relative;
     animation: glitch 3s infinite;
 }
 
-@keyframes glitch {
-    0% {
-        text-shadow: 2px 2px 0 #00ff00, -2px -2px 0 #0000ff;
-        transform: translate(0);
-    }
-    25% {
-        text-shadow: -2px 2px 0 #00ff00, 2px -2px 0 #0000ff;
-        transform: translate(1px, 1px);
-    }
-    50% {
-        text-shadow: 2px -2px 0 #00ff00, -2px 2px 0 #0000ff;
-        transform: translate(-1px, -1px);
-    }
-    75% {
-        text-shadow: -2px -2px 0 #00ff00, 2px 2px 0 #0000ff;
-        transform: translate(1px, -1px);
-    }
-    100% {
-        text-shadow: 2px 2px 0 #00ff00, -2px -2px 0 #0000ff;
-        transform: translate(0);
-    }
-}
-
-.glitch::before,
-.glitch::after {
+.glitch-title::before,
+.glitch-title::after {
     content: attr(data-text);
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    clip: rect(0, 900px, 0, 0);
 }
 
-.glitch::before {
+.glitch-title::before {
     left: 2px;
-    text-shadow: 1px 0 #00ff00;
-    animation: glitch-anim 2s infinite linear alternate-reverse;
+    text-shadow: -2px 0 #0ff;
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim 3s infinite linear alternate-reverse;
 }
 
-.glitch::after {
+.glitch-title::after {
     left: -2px;
-    text-shadow: -1px 0 #ff00ff;
-    animation: glitch-anim2 3s infinite linear alternate-reverse;
+    text-shadow: 2px 0 #f0f;
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim2 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch {
+    0% {
+        text-shadow: 2px 2px 0 #000;
+        transform: translate(0);
+    }
+    20% {
+        text-shadow: -2px -2px 0 #0ff, 2px 2px 0 #f0f;
+        transform: translate(-2px, 2px);
+    }
+    40% {
+        text-shadow: 2px -2px 0 #0ff, -2px 2px 0 #f0f;
+        transform: translate(2px, -2px);
+    }
+    60% {
+        text-shadow: -2px 2px 0 #0ff, 2px -2px 0 #f0f;
+        transform: translate(2px, 2px);
+    }
+    80% {
+        text-shadow: 2px 2px 0 #0ff, -2px -2px 0 #f0f;
+        transform: translate(-2px, -2px);
+    }
+    100% {
+        text-shadow: 2px 2px 0 #000;
+        transform: translate(0);
+    }
+}
+
+@keyframes glitch-anim {
+    0% {
+        clip: rect(42px, 9999px, 44px, 0);
+    }
+    20% {
+        clip: rect(12px, 9999px, 59px, 0);
+    }
+    40% {
+        clip: rect(48px, 9999px, 29px, 0);
+    }
+    60% {
+        clip: rect(73px, 9999px, 61px, 0);
+    }
+    80% {
+        clip: rect(15px, 9999px, 87px, 0);
+    }
+    100% {
+        clip: rect(53px, 9999px, 70px, 0);
+    }
+}
+
+@keyframes glitch-anim2 {
+    0% {
+        clip: rect(25px, 9999px, 99px, 0);
+    }
+    20% {
+        clip: rect(44px, 9999px, 33px, 0);
+    }
+    40% {
+        clip: rect(68px, 9999px, 74px, 0);
+    }
+    60% {
+        clip: rect(12px, 9999px, 46px, 0);
+    }
+    80% {
+        clip: rect(95px, 9999px, 37px, 0);
+    }
+    100% {
+        clip: rect(58px, 9999px, 81px, 0);
+    }
 }
 
 .terminal {
@@ -526,7 +575,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .terminal-header {
-    background: rgb(25, 25, 25);
+    background: rgb(45, 45, 45);
     padding: 8px 15px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -631,7 +680,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .terminal-header {
-    background: rgb(45, 45, 45);
+    background: rgb(25, 25, 25);
     padding: 8px 15px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -888,6 +937,10 @@ body::-webkit-scrollbar-thumb {
 @media (max-width: 768px) {
     .container {
         padding: 12px;
+    }
+
+    .glitch-title {
+        font-size: 1.8em;
     }
 
     .info-grid {
