@@ -3,29 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hacked by AnonX</title>
+    <title>System Compromised - Faded0x99</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
+    <canvas id="matrix-rain"></canvas>
+    <div class="noise"></div>
+    <div class="overlay"></div>
+    
     <div class="container">
-        <div class="glitch-wrapper">
-            <div class="glitch" data-text="SYSTEM COMPROMISED">SYSTEM COMPROMISED</div>
+        <div class="system-info">
+            <div class="info-grid" id="systemInfo">
+                <div class="info-item">
+                    <span class="info-label">Target IP:</span>
+                    <span class="info-value" id="ipAddress">**.**.**.***</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">System:</span>
+                    <span class="info-value" id="osInfo">Loading...</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Browser:</span>
+                    <span class="info-value" id="browserInfo">Loading...</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Display:</span>
+                    <span class="info-value" id="screenInfo">Loading...</span>
+                </div>
+            </div>
         </div>
-        
-        <div class="hacker-image">
-            <img src="1.png" alt="AnonX Logo" class="avatar">
+
+        <div class="breach-progress">
+            <div class="progress-wrapper">
+                <div id="processLog" class="process-log"></div>
+                <div class="progress-bar">
+                    <div class="progress" id="mainProgress"></div>
+                </div>
+                <div class="progress-status" id="progressStatus">Initializing Attack Vectors...</div>
+            </div>
         </div>
-        
-        <div class="message">
-            <p class="typing-text">Your system has been breached by</p>
-            <h1 class="hacker-name">AnonX</h1>
-            <p class="blink-text">[Access Granted]</p>
+
+        <div class="main-content">
+            <div class="glitch-wrapper">
+                <div class="glitch" data-text="SYSTEM COMPROMISED">SYSTEM COMPROMISED</div>
+            </div>
+            
+            <div class="hacker-image">
+                <img src="1.png" alt="Faded0x99 Logo" class="avatar">
+                <div class="avatar-overlay"></div>
+            </div>
+            
+            <div class="message">
+                <div class="typing-text">System successfully hijacked by</div>
+                <h1 class="hacker-name">Faded0x99</h1>
+                <div class="status-container">
+                    <p class="blink-text">[ROOT ACCESS GRANTED]</p>
+                    <div id="hackStats" class="hack-stats">
+                        <div class="stat">Files Encrypted: <span id="encryptedCount">0</span></div>
+                        <div class="stat">Backdoors: <span id="backdoorCount">0</span></div>
+                        <div class="stat">Time Elapsed: <span id="timeElapsed">00:00</span></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="matrix-text">
-            <span class="scrolling-text">01001000 01100001 01100011 01101011 01100101 01100100</span>
+
+        <div class="data-stream">
+            <div class="data-row" id="dataStream"></div>
         </div>
     </div>
+
+    <div class="terminal">
+        <div class="terminal-header">
+            <span class="terminal-title">faded0x99@target:~# </span>
+            <div class="terminal-buttons">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="terminal-content" id="terminalOutput"></div>
+    </div>
+
+    <script src="matrix.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
