@@ -75,14 +75,56 @@ body::-webkit-scrollbar-thumb {
 }
 
 .scan-text {
-    color: #00ff00;
-    font-size: 1.2em;
-    text-shadow: 0 0 5px #00ff00;
-    margin-top: 15px;
+    font-size: 1em;
     text-align: center;
-    line-height: 1.3;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    line-height: 1.5;
     max-width: 95%;
     padding: 0 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+@media (max-height: 600px) {
+    .scan-text {
+        margin-bottom: 60px;
+    }
+}
+
+@media (max-height: 480px) {
+    .scan-text {
+        margin-bottom: 70px;
+    }
+}
+
+.scan-text .shimmer-text {
+    background: linear-gradient(90deg, 
+        #004400 0%,
+        #004400 35%,
+        #00ff00 50%,
+        #004400 65%,
+        #004400 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s linear infinite;
+    text-shadow: 0 0 2px rgba(0, 255, 0, 0.3);
+    white-space: nowrap;
+}
+
+.scan-text .faded-text {
+    background-color: #ff0000;
+    color: #000000;
+    padding: 3px 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    white-space: nowrap;
 }
 
 .scan-status, .scan-error {
@@ -156,11 +198,22 @@ body::-webkit-scrollbar-thumb {
     animation: explodeText 0.5s forwards;
 }
 
-.fingerprint-scanner {
-    width: 250px;
-    height: 250px;
+.fingerprint-container {
     position: relative;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 10px 0 40px;
+    box-sizing: border-box;
+}
+
+.fingerprint-scanner {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    margin: 15px auto;
     background: rgba(0, 255, 0, 0.05);
     border-radius: 50%;
     border: 1px solid rgba(0, 255, 0, 0.2);
@@ -169,49 +222,79 @@ body::-webkit-scrollbar-thumb {
     transition: all 0.3s ease;
 }
 
-.fingerprint-scanner:hover {
-    box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
-    border-color: rgba(255, 0, 0, 0.4);
-    transform: scale(1.02);
+.scan-text {
+    font-size: 1em;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 45px;
+    line-height: 1.5;
+    max-width: 95%;
+    padding: 0 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
 }
 
-.fingerprint-scanner.bursting .fingerprint-lines path {
-    animation: pathBurst 1s ease-out forwards;
+@media (max-height: 600px) {
+    .fingerprint-container {
+        padding: 8px 0 35px;
+    }
+    
+    .fingerprint-scanner {
+        width: 120px;
+        height: 120px;
+        margin: 8px auto;
+    }
+
+    .scan-text {
+        margin-top: 8px;
+        margin-bottom: 35px;
+        font-size: 0.95em;
+    }
 }
 
-.scan-line {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: #00ff00;
-    opacity: 0;
-    box-shadow: 0 0 10px #00ff00;
+@media (max-height: 480px) {
+    .fingerprint-container {
+        padding: 6px 0 30px;
+        justify-content: flex-start;
+    }
+    
+    .fingerprint-scanner {
+        width: 90px;
+        height: 90px;
+        margin: 6px auto;
+    }
+
+    .scan-text {
+        margin-top: 6px;
+        margin-bottom: 30px;
+        font-size: 0.85em;
+        gap: 6px;
+    }
 }
 
-.scanner-prompt.scanning .scan-line {
-    opacity: 0.5;
-    animation: scanLine 0.5s linear infinite;
-    animation-duration: calc(0.5s - (var(--scan-progress, 0) * 0.4s));
-}
+@media (max-height: 400px) {
+    .fingerprint-container {
+        padding: 5px 0 25px;
+    }
+    
+    .fingerprint-scanner {
+        width: 70px;
+        height: 70px;
+        margin: 5px auto;
+    }
 
-.scan-glow {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(255,0,0,0.2) 0%, rgba(255,0,0,0.1) 50%, transparent 70%);
-    filter: blur(10px);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
+    .scan-text {
+        margin-top: 5px;
+        margin-bottom: 25px;
+        font-size: 0.75em;
+        gap: 4px;
+    }
 
-.scanner-prompt.scanning .scan-glow {
-    opacity: 1;
+    .scan-text .faded-text {
+        padding: 2px 8px;
+    }
 }
 
 .fingerprint-svg {
@@ -256,6 +339,41 @@ body::-webkit-scrollbar-thumb {
 .fingerprint-lines path:nth-child(6) { animation-delay: 1s; }
 .fingerprint-lines path:nth-child(7) { animation-delay: 1.2s; }
 .fingerprint-lines path:nth-child(8) { animation-delay: 1.4s; }
+
+.scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #00ff00;
+    opacity: 0;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+.scanner-prompt.scanning .scan-line {
+    opacity: 0.5;
+    animation: scanLine 0.5s linear infinite;
+    animation-duration: calc(0.5s - (var(--scan-progress, 0) * 0.4s));
+}
+
+.scan-glow {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,0,0,0.2) 0%, rgba(255,0,0,0.1) 50%, transparent 70%);
+    filter: blur(10px);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.scanner-prompt.scanning .scan-glow {
+    opacity: 1;
+}
 
 .scanner-prompt.scanning {
     animation: panicShake 0.05s ease-in-out infinite;
@@ -1473,10 +1591,11 @@ body::-webkit-scrollbar-thumb {
     }
 
     .scan-text {
-        font-size: 1em;
-        margin-top: 12px;
-        line-height: 1.2;
-        padding: 0 3px;
+        font-size: 0.9em;
+    }
+    
+    .scan-text .shimmer-text {
+        white-space: normal;
     }
 
     .scan-status, .scan-error {
@@ -1501,7 +1620,7 @@ body::-webkit-scrollbar-thumb {
     }
 
     .scan-text {
-        font-size: 0.9em;
+        font-size: 0.8em;
         line-height: 1.15;
     }
 
@@ -1519,7 +1638,7 @@ body::-webkit-scrollbar-thumb {
     }
 
     .scan-text {
-        font-size: 0.85em;
+        font-size: 0.75em;
         line-height: 1.1;
     }
 
