@@ -300,6 +300,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const contextMenu = document.querySelector('.custom-context-menu');
     const contextMenuItems = document.querySelectorAll('.context-menu-item');
 
+    // Function to update menu text based on screen size
+    function updateMenuText() {
+        const isMobile = window.innerWidth <= 480;
+        const menuTexts = {
+            hack: isMobile ? "Hack it" : "Attempt to hack (Good luck!)",
+            inspect: isMobile ? "Inspect" : "Inspect (Nothing to see here)",
+            copy: isMobile ? "Copy" : "Copy (Like you'd need this)",
+            report: isMobile ? "Report" : "Report bug (It's not a bug, it's a feature)",
+            exit: isMobile ? "Exit" : "Exit (You can't escape)"
+        };
+
+        contextMenuItems.forEach(item => {
+            const action = item.getAttribute('data-action');
+            const textElement = item.querySelector('.text');
+            if (textElement && menuTexts[action]) {
+                textElement.textContent = menuTexts[action];
+            }
+        });
+    }
+
+    // Update text on resize
+    window.addEventListener('resize', updateMenuText);
+    // Initial text update
+    updateMenuText();
+
     document.addEventListener('contextmenu', (e) => {
         e.preventDefault();
         
@@ -321,6 +346,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (mouseY + menuHeight > winHeight) {
             y = mouseY - menuHeight;
         }
+        
+        // Ensure menu stays within viewport bounds
+        x = Math.max(0, Math.min(x, winWidth - menuWidth));
+        y = Math.max(0, Math.min(y, winHeight - menuHeight));
         
         contextMenu.style.left = `${x}px`;
         contextMenu.style.top = `${y}px`;
