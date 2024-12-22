@@ -75,8 +75,13 @@ document.addEventListener('DOMContentLoaded', () => {
         progress = 0;
         setProgress(0);
         
+        let scanSpeed = 0;
+        
         progressInterval = setInterval(() => {
             progress += PROGRESS_STEP;
+            scanSpeed = Math.min(0.8, progress / 100); // Max speed factor
+            document.querySelector('.scan-line').style.setProperty('--scan-progress', scanSpeed);
+            
             if (progress >= 100) {
                 progress = 100;
                 clearInterval(progressInterval);
@@ -175,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
         for (const cmd of commands) {
-            addTerminalLine(cmd.text);
+            await typeTerminalText(cmd.text, 'info');
             await sleep(cmd.delay);
         }
 
@@ -183,35 +188,133 @@ document.addEventListener('DOMContentLoaded', () => {
         await sleep(500);
         
         if (visitorInfo) {
-            addTerminalLine(`> IP Address located: ${maskIP(visitorInfo.ip)}`);
+            await typeTerminalText(`> IP Address located: ${maskIP(visitorInfo.ip)}`, 'success');
             await sleep(300);
-            addTerminalLine(`> Location triangulated: ${maskLocation(visitorInfo.location.city, visitorInfo.location.country_name)}`);
+            await typeTerminalText(`> Location triangulated: ${maskLocation(visitorInfo.location.city, visitorInfo.location.country_name)}`, 'success');
             await sleep(300);
         }
         
-        addTerminalLine('> Analyzing system environment...');
+        await typeTerminalText('> Analyzing system environment...', 'info');
         await sleep(500);
         
-        addTerminalLine(`> Browser fingerprint: ${navigator.userAgent}`);
+        await typeTerminalText(`> Browser fingerprint: ${navigator.userAgent}`, 'error');
         await sleep(300);
-        addTerminalLine(`> Operating system: ${navigator.platform}`);
+        await typeTerminalText(`> Operating system: ${navigator.platform}`, 'error');
         await sleep(300);
-        addTerminalLine(`> System language: ${navigator.language}`);
+        await typeTerminalText(`> System language: ${navigator.language}`, 'error');
         await sleep(500);
         
-        addTerminalLine('> Hack complete! System compromised! 😈');
+        await typeTerminalText('> Hack complete! System compromised! 😈', 'warning');
         getRandomDadJoke();
     }
 
-    function addTerminalLine(text, type = 'command') {
+    function addTerminalLine(text, type = '') {
+        const terminal = document.getElementById('terminalOutput');
         const line = document.createElement('div');
         line.className = `terminal-line ${type}`;
         line.textContent = text;
-        terminalOutput.appendChild(line);
-        terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        terminal.appendChild(line);
+        terminal.scrollTop = terminal.scrollHeight;
+    }
+
+    function typeTerminalText(text, type = '') {
+        return new Promise((resolve) => {
+            let index = 0;
+            let speed = Math.random() * 20 + 20; // Random speed between 20ms and 40ms
+            
+            const interval = setInterval(() => {
+                if (index === 0) {
+                    addTerminalLine('', type);
+                }
+                
+                const currentLine = document.querySelector('.terminal-line:last-child');
+                currentLine.textContent += text[index];
+                
+                // Auto scroll
+                const terminal = document.getElementById('terminalOutput');
+                terminal.scrollTop = terminal.scrollHeight;
+                
+                index++;
+                
+                // Add random pauses
+                if (text[index] === '.' || text[index] === '!' || text[index] === '?') {
+                    speed = Math.random() * 200 + 100; // Longer pause for punctuation
+                } else {
+                    speed = Math.random() * 20 + 20; // Normal typing speed
+                }
+                
+                if (index >= text.length) {
+                    clearInterval(interval);
+                    setTimeout(resolve, 100); // Small pause after line completion
+                }
+            }, speed);
+        });
     }
 
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
+
+    // Dialog functionality
+    document.querySelector('.dev-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector('.dev-dialog-overlay').classList.add('active');
+        document.querySelector('.dev-dialog').classList.add('active');
+    });
+
+    document.querySelector('.dev-dialog-btn').addEventListener('click', function() {
+        window.open('https://github.com/anonfaded', '_blank');
+        closeDialog();
+    });
+
+    document.querySelector('.close-btn').addEventListener('click', closeDialog);
+    document.querySelector('.dev-dialog-overlay').addEventListener('click', closeDialog);
+
+    function closeDialog() {
+        document.querySelector('.dev-dialog-overlay').classList.remove('active');
+        document.querySelector('.dev-dialog').classList.remove('active');
+    }
+
+    // Terminal functionality
+    function addToTerminal(text, delay = 50) {
+        const terminal = document.getElementById('terminal-content');
+        const lines = text.split('\n');
+        let i = 0;
+
+        function addLine() {
+            if (i < lines.length) {
+                const line = document.createElement('div');
+                line.textContent = lines[i];
+                terminal.appendChild(line);
+                terminal.scrollTop = terminal.scrollHeight;
+                i++;
+                setTimeout(addLine, delay);
+            }
+        }
+
+        addLine();
+    }
+
+    // Example terminal content
+    const terminalText = `[*] Initializing system scan...
+[+] Accessing target device...
+[+] Collecting system information...
+[+] Analyzing browser data...
+[+] Scanning network ports...
+[*] Target information acquired successfully
+[>] Running security protocols...
+[>] Establishing secure connection...
+[✓] Access granted`;
+
+    // Add interactive elements suggestions:
+    // 1. Matrix rain effect on hover over certain elements
+    // 2. Interactive terminal where users can type basic commands
+    // 3. Easter eggs in the console
+    // 4. Hidden keyboard shortcuts
+    // 5. "Hack attempt" mini-game
+    // 6. Glitch effects on images
+    // 7. Secret morse code messages
+    // 8. Hidden QR codes
+    // 9. Interactive 3D elements
+    // 10. Voice command easter eggs
 });
