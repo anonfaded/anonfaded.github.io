@@ -199,20 +199,28 @@ document.addEventListener('DOMContentLoaded', () => {
         await sleep(1000);
         
         await typeTextToTerminal('ACCESS GRANTED', 'text-green blink');
+        await sleep(2000); // Added delay to ensure proper scrolling
         
         // Create and append hex/binary display container
         const hexBinaryContainer = document.createElement('div');
         hexBinaryContainer.className = 'hex-binary-container';
         terminalOutput.appendChild(hexBinaryContainer);
         
-        // Update hex/binary display every 100ms
-        setInterval(() => {
+        // Function to update hex/binary and scroll
+        function updateHexBinary() {
             const { hex, binary } = generateRandomHexBinary();
             hexBinaryContainer.innerHTML = `
-                <span class="text-cyan">HEX: ${hex}</span>
-                <span class="text-green">BIN: ${binary}</span>
+                <div class="text-red">HEX: ${hex}</div>
+                <div class="text-green">BIN: ${binary}</div>
             `;
-        }, 100);
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        }
+        
+        // Initial update
+        updateHexBinary();
+        
+        // Update hex/binary display every 100ms
+        setInterval(updateHexBinary, 100);
     }
 
     async function typeTextToTerminal(text, className = '') {

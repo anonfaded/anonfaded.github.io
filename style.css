@@ -1220,6 +1220,11 @@ body::-webkit-scrollbar-thumb {
     text-shadow: 0 0 5px #00ff00;
 }
 
+.text-red {
+    color: #ff0000;
+    text-shadow: 0 0 5px #ff0000;
+}
+
 .text-cyan {
     color: #00ffff;
     text-shadow: 0 0 5px #00ffff;
