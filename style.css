@@ -142,10 +142,6 @@ body::-webkit-scrollbar-thumb {
         font-size: 0.9em;
         padding: 6px 12px;
     }
-    .scan-text {
-        padding: 0 12px;
-        max-width: 100%;
-    }
 }
 
 @media (max-width: 400px) {
@@ -153,10 +149,6 @@ body::-webkit-scrollbar-thumb {
         width: 82%;
         font-size: 0.85em;
         padding: 5px 10px;
-    }
-    .scan-text {
-        padding: 0 10px;
-        font-size: 0.95em;
     }
 }
 

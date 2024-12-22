@@ -70,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         isScanning = true;
         scanner.classList.add('scanning');
-        scanError.classList.add('hidden');
         scanStatus.textContent = "Almost there... Keep holding! 😰";
         progress = 0;
         setProgress(0);
@@ -99,11 +98,26 @@ document.addEventListener('DOMContentLoaded', () => {
         clearTimeout(scanTimeout);
         clearInterval(progressInterval);
         
+        // Immediately set sarcastic text
+        scanStatus.textContent = "Scared already? How predictable. 🙄";
+        
+        // Reset scan line progress
+        document.querySelector('.scan-line').style.setProperty('--scan-progress', 0);
+        
         if (progress < 100) {
-            scanError.classList.remove('hidden');
-            scanStatus.textContent = "Don't be scared, I won't bite! 😈";
-            progress = 0;
-            setProgress(0);
+            // Quickly animate progress back to 0
+            let currentProgress = progress;
+            const resetInterval = setInterval(() => {
+                currentProgress -= PROGRESS_STEP * 2;
+                if (currentProgress <= 0) {
+                    currentProgress = 0;
+                    clearInterval(resetInterval);
+                    
+                    // Show sarcastic notification
+                    showNotification("Tsk tsk... losing your nerve? 😏", "error");
+                }
+                setProgress(currentProgress);
+            }, 20);
         }
     }
 
