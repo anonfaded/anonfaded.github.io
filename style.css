@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+body {
+    background: #000 url('https://i.imgur.com/3vL8Fdy.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #ff0000;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #ff0000;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+}
+
+.glitch-wrapper {
+    margin-bottom: 30px;
+}
+
+.glitch {
+    font-size: 36px;
+    font-weight: bold;
+    position: relative;
+    text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+                 0.025em 0.04em 0 #fffc00;
+    animation: glitch 725ms infinite;
+}
+
+.glitch span {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hacker-image {
+    margin: 20px 0;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #ff0000;
+    box-shadow: 0 0 20px #ff0000;
+}
+
+.message {
+    margin: 20px 0;
+}
+
+.typing-text {
+    font-size: 18px;
+    margin-bottom: 10px;
+    animation: typing 3s steps(40, end);
+}
+
+.hacker-name {
+    font-size: 48px;
+    color: #ff0000;
+    text-shadow: 0 0 10px #ff0000;
+    margin: 15px 0;
+}
+
+.blink-text {
+    animation: blink 1s infinite;
+    font-size: 24px;
+    margin: 15px 0;
+}
+
+.matrix-text {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    left: 0;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.scrolling-text {
+    animation: scroll-left 20s linear infinite;
+}
+
+@keyframes glitch {
+    0% {
+        text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+                     0.025em 0.04em 0 #fffc00;
+    }
+    15% {
+        text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+                     0.025em 0.04em 0 #fffc00;
+    }
+    16% {
+        text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff,
+                     -0.05em -0.05em 0 #fffc00;
+    }
+    49% {
+        text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff,
+                     -0.05em -0.05em 0 #fffc00;
+    }
+    50% {
+        text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff,
+                     0 -0.04em 0 #fffc00;
+    }
+    99% {
+        text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff,
+                     0 -0.04em 0 #fffc00;
+    }
+    100% {
+        text-shadow: -0.05em 0 0 #00fffc, -0.025em -0.04em 0 #fc00ff,
+                     -0.04em -0.025em 0 #fffc00;
+    }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes scroll-left {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+@media (max-width: 768px) {
+    .glitch {
+        font-size: 24px;
+    }
+    .hacker-name {
+        font-size: 36px;
+    }
+    .avatar {
+        width: 120px;
+        height: 120px;
+    }
+}
