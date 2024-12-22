@@ -8,7 +8,7 @@
 body {
     background: #000;
     color: #fff;
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Press Start 2P', monospace;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 0, 0, 0.5) rgba(0, 0, 0, 0.3);
@@ -64,19 +64,19 @@ body::-webkit-scrollbar-thumb {
 
 .scan-messages {
     position: relative;
-    padding: 40px 20px;
+    padding: 60px 20px;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 140px;
+    height: 200px;
     margin-bottom: 20px;
 }
 
 .scan-text {
     color: #00ff00;
-    font-size: 1.2em;
+    font-size: 0.6em;
     text-shadow: 0 0 5px #00ff00;
     margin-top: 20px;
     text-align: center;
@@ -89,19 +89,19 @@ body::-webkit-scrollbar-thumb {
     width: 100%;
     max-width: 600px;
     color: #ff0000;
-    font-size: 1.4em;
+    font-size: 0.7em;
     text-shadow: 0 0 8px #ff0000;
     text-align: center;
     padding: 15px 20px;
 }
 
 .scan-status {
-    top: 0;
+    top: 20px;
     animation: pulseText 2s infinite;
 }
 
 .scan-error {
-    bottom: 0;
+    bottom: 20px;
     animation: glitchText 0.8s infinite;
 }
 
@@ -135,8 +135,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 .progress-text {
-    font-family: 'Rubik Glitch', cursive;
-    font-size: clamp(3rem, 6vw + 1rem, 4.5rem);
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(1rem, 2vw + 0.2rem, 1.5rem);
     position: absolute;
     top: 0;
     left: 50%;
@@ -147,7 +147,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .progress-text[data-progress="100"] {
-    font-size: clamp(4rem, 8vw + 1rem, 6rem);
+    font-size: clamp(1.2rem, 2.5vw + 0.3rem, 2rem);
     text-shadow: 0 0 20px #ff0000;
     animation: explodeText 0.5s forwards;
 }
@@ -396,13 +396,13 @@ body::-webkit-scrollbar-thumb {
 }
 
 .by-text {
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Press Start 2P', cursive;
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.9em;
 }
 
 .hacker-name {
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Press Start 2P', cursive;
     font-weight: 700;
     color: #ff0000;
     text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
@@ -484,12 +484,16 @@ body::-webkit-scrollbar-thumb {
 }
 
 .glitch-title {
-    font-family: 'Rubik Glitch', cursive;
-    font-size: clamp(2.5rem, 5vw + 1rem, 4rem);
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(1rem, 2vw + 0.3rem, 1.8rem);
     color: #ff0000;
     text-shadow: 2px 2px 10px rgba(255, 0, 0, 0.5);
     margin-bottom: 10px;
     position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
     animation: glitch 3s infinite;
 }
 
@@ -518,11 +522,12 @@ body::-webkit-scrollbar-thumb {
 }
 
 .sub-text {
-    font-family: 'Teko', sans-serif;
-    font-size: clamp(0.9rem, 1.5vw + 0.3rem, 1.5rem);
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: clamp(0.5rem, 0.8vw + 0.1rem, 0.8rem);
     color: #fff;
     margin-top: 2px;
     margin-bottom: 0;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
 }
 
 .visitor-info {
@@ -531,11 +536,13 @@ body::-webkit-scrollbar-thumb {
 }
 
 .section-title {
-    font-family: 'Teko', sans-serif;
-    font-size: clamp(1.5rem, 3vw + 0.5rem, 2.5rem);
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: clamp(0.8rem, 1.5vw + 0.2rem, 1.2rem);
     color: #ff0000;
     margin-bottom: 15px;
     text-align: center;
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+    position: relative;
 }
 
 .section-title::after {
@@ -559,7 +566,7 @@ body::-webkit-scrollbar-thumb {
     border-radius: 10px;
     margin: 20px 0;
     height: 120px;
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Press Start 2P', monospace;
     display: flex;
     flex-direction: column;
 }
@@ -589,7 +596,7 @@ body::-webkit-scrollbar-thumb {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Press Start 2P', monospace;
     font-size: 0.9em;
     transition: all 0.3s ease;
     position: relative;
@@ -666,7 +673,7 @@ body::-webkit-scrollbar-thumb {
     margin: 20px 0;
     height: 120px;
     overflow-y: auto;
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Press Start 2P', monospace;
 }
 
 .terminal-header {
@@ -835,94 +842,199 @@ body::-webkit-scrollbar-thumb {
     left: 50%;
     transform: translateX(-50%);
     background: rgba(0, 0, 0, 0.8);
-    padding: 10px 20px;
+    padding: 6px 15px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border: 1px solid rgba(255, 0, 0, 0.3);
     border-bottom: none;
     text-align: center;
     white-space: nowrap;
-    font-size: clamp(0.8rem, 2vw, 1rem);
+    font-size: 0.7em;
     z-index: 1000;
-}
-
-.footer .heart {
-    position: relative;
-    display: inline-block;
-    color: #000;
-    font-size: 1em;
-    margin: 0 3px;
-}
-
-.heart::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 15px;
-    height: 15px;
-    background: rgba(255, 0, 0, 0.6);
-    border-radius: 50%;
-    filter: blur(4px);
-    animation: heartGlow 1.5s infinite alternate;
 }
 
 .footer .dev-link {
     color: #ff0000;
     text-decoration: none;
     position: relative;
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.7em;
     text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
-    animation: glitchText 0.3s infinite;
 }
 
-.footer .dev-link:hover {
-    text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
-}
-
-.disclaimer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+.terminal-container {
     background: rgba(0, 0, 0, 0.8);
-    color: #ff0000;
+    border: 1px solid rgba(255, 0, 0, 0.3);
     padding: 10px;
-    font-size: 0.8em;
-    text-align: center;
-    border-top: 1px solid rgba(255, 0, 0, 0.3);
-    z-index: 1000;
+    border-radius: 10px;
+    margin: 15px 0;
+    height: 100px;
+    font-family: 'Press Start 2P', monospace;
+    display: flex;
+    flex-direction: column;
 }
 
-.disclaimer p {
-    margin: 5px 0;
-    text-align: center;
+.terminal-text {
+    font-size: 0.6em;
+    line-height: 1.4;
 }
 
-.matrix-rain {
-    z-index: -1 !important;
-    position: fixed;
+.hex-binary-container {
+    margin-top: 8px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
-#main-container {
-    position: relative;
-    z-index: 1;
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .terminal-container {
+        height: 80px;
+        margin: 10px 0;
+    }
+    
+    .scan-messages {
+        padding: 40px 15px;
+        height: 160px;
+    }
+    
+    .footer {
+        padding: 3px 10px;
+    }
 }
 
-.scanner-container {
-    position: relative;
-    z-index: 2;
-    padding-bottom: 60px;
+@media (max-width: 480px) {
+    .container {
+        padding: 8px;
+        padding-top: max(8px, 2vh);
+    }
+    
+    .avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    .glitch-title {
+        font-size: 1.1rem;
+        padding: 0 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: calc(100vw - 30px);
+    }
+
+    .sub-text {
+        font-size: 0.65rem;
+        margin-top: 2px;
+    }
+
+    .section-title {
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+    }
+
+    .terminal-container {
+        height: 80px;
+        margin: 10px 0;
+        padding: 8px;
+    }
+
+    .terminal-text {
+        font-size: 0.55em;
+    }
+
+    .progress-text {
+        font-size: 1.2rem;
+    }
+
+    .progress-text[data-progress="100"] {
+        font-size: 1.4rem;
+    }
+
+    .scan-status, .scan-error {
+        font-size: 0.65em;
+        padding: 10px;
+    }
+
+    .scan-text {
+        font-size: 0.55em;
+        margin-top: 12px;
+    }
+
+    .hex-binary-container {
+        font-size: 0.5em;
+        gap: 3px;
+        margin-top: 6px;
+    }
+
+    .browser-info {
+        font-size: 0.55em;
+        max-width: calc(100vw - 20px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .visitor-info {
+        font-size: 0.55em;
+        max-width: calc(100vw - 20px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .scan-messages {
+        padding: 35px 12px;
+        height: 140px;
+    }
+
+    .fingerprint-scanner {
+        width: 180px;
+        height: 180px;
+    }
 }
 
-.cursor {
-    display: inline-block;
-    width: 8px;
-    height: 15px;
-    background-color: #00ff00;
-    margin-left: 2px;
-    animation: blink 1s infinite;
+@media (max-width: 320px) {
+    .container {
+        padding: 5px;
+    }
+
+    .avatar {
+        width: 80px;
+        height: 80px;
+    }
+
+    .glitch-title {
+        font-size: 0.9rem;
+    }
+
+    .sub-text {
+        font-size: 0.5rem;
+    }
+
+    .section-title {
+        font-size: 0.7rem;
+    }
+
+    .terminal-text {
+        font-size: 0.45em;
+    }
+
+    .browser-info, .visitor-info {
+        font-size: 0.45em;
+    }
+
+    .scan-status, .scan-error {
+        font-size: 0.55em;
+    }
+
+    .fingerprint-scanner {
+        width: 150px;
+        height: 150px;
+    }
 }
 
 @keyframes blink {
@@ -980,77 +1092,10 @@ body::-webkit-scrollbar-thumb {
     }
 }
 
-@media (max-width: 768px) {
-    .container {
-        padding-top: max(10px, 3vh); /* Reduced padding for mobile */
-    }
-    
-    .header {
-        margin-bottom: max(15px, 3vh); /* Reduced margin for mobile */
-    }
-
-    .avatar {
-        margin-bottom: 10px; /* Reduced margin for mobile */
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding-top: max(10px, 3vh);
-    }
-    
-    .avatar {
-        width: 100px;
-        height: 100px;
-    }
-
-    .glitch-title {
-        font-size: clamp(1.5rem, 3vw + 0.5rem, 2rem);
-    }
-
-    .sub-text {
-        font-size: clamp(0.9rem, 1.2vw + 0.3rem, 1.2rem);
-    }
-
-    .progress-text {
-        font-size: clamp(2.5rem, 5vw + 0.8rem, 3.5rem);
-    }
-
-    .progress-text[data-progress="100"] {
-        font-size: clamp(3.5rem, 7vw + 1rem, 5rem);
-    }
-
-    .footer {
-        font-size: 0.8rem;
-        padding: 8px 15px;
-    }
-}
-
 @keyframes glitch {
-    0% {
-        text-shadow: 2px 2px 0 #000;
-        transform: translate(0);
-    }
-    20% {
-        text-shadow: -2px -2px 0 #0ff, 2px 2px 0 #f0f;
-        transform: translate(-2px, 2px);
-    }
-    40% {
-        text-shadow: 2px -2px 0 #0ff, -2px 2px 0 #f0f;
-        transform: translate(2px, -2px);
-    }
-    60% {
-        text-shadow: -2px 2px 0 #0ff, 2px -2px 0 #f0f;
-        transform: translate(2px, 2px);
-    }
-    80% {
-        text-shadow: 2px 2px 0 #0ff, -2px -2px 0 #f0f;
-        transform: translate(-2px, -2px);
-    }
-    100% {
-        text-shadow: 2px 2px 0 #000;
-        transform: translate(0);
-    }
+    2%, 64% { transform: translate(2px,0) skew(0deg); }
+    4%, 60% { transform: translate(-2px,0) skew(0deg); }
+    62% { transform: translate(0,0) skew(5deg); }
 }
 
 @keyframes glitch-anim {
@@ -1287,7 +1332,8 @@ body::-webkit-scrollbar-thumb {
 
 .hex-binary-container {
     margin-top: 10px;
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.7em;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -1296,4 +1342,8 @@ body::-webkit-scrollbar-thumb {
 .hex-binary-container span {
     font-size: 14px;
     letter-spacing: 2px;
+}
+
+.terminal-text {
+    font-size: 0.8em;
 }
