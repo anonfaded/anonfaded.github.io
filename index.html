@@ -6,6 +6,8 @@
     <title>System Infected - Faded0x99</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <div class="matrix-container">
@@ -97,11 +99,17 @@
                 <div class="info-grid">
                     <div class="info-item">
                         <div class="info-label">IP Address</div>
-                        <div class="info-value" id="ipAddress">Scanning...</div>
+                        <div class="info-value-container">
+                            <div class="info-value" id="ipAddress">Scanning...</div>
+                            <span class="reveal-icon material-icons" id="ipRevealIcon">visibility_off</span>
+                        </div>
                     </div>
                     <div class="info-item">
                         <div class="info-label">Location</div>
-                        <div class="info-value" id="locationInfo">Analyzing...</div>
+                        <div class="info-value-container">
+                            <div class="info-value" id="locationInfo">Analyzing...</div>
+                            <span class="reveal-icon material-icons" id="locationRevealIcon">visibility_off</span>
+                        </div>
                     </div>
                     <div class="info-item">
                         <div class="info-label">Browser</div>

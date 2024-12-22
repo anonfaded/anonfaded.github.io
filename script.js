@@ -416,5 +416,65 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Reveal functionality for IP and Location
+    const ipAddressElement = document.getElementById('ipAddress');
+    const locationInfoElement = document.getElementById('locationInfo');
+    const ipRevealIcon = document.getElementById('ipRevealIcon');
+    const locationRevealIcon = document.getElementById('locationRevealIcon');
+
+    let originalIP = '';
+    let originalLocation = '';
+
+    function maskIP(ip) {
+        originalIP = ip;
+        return ip.split('.').map((octet, i) => i < 3 ? '**' : octet).join('.');
+    }
+
+    function maskLocation(city, country) {
+        originalLocation = `${city}, ${country}`;
+        return `******, ${country}`;
+    }
+
+    function toggleReveal(element, revealIcon, originalValue, isMasked) {
+        if (isMasked) {
+            element.textContent = originalValue;
+            revealIcon.textContent = 'visibility';
+            return false;
+        } else {
+            element.textContent = originalValue.includes(',') 
+                ? maskLocation(originalValue.split(',')[0].trim(), originalValue.split(',')[1].trim())
+                : maskIP(originalValue);
+            revealIcon.textContent = 'visibility_off';
+            return true;
+        }
+    }
+
+    // Modify existing getVisitorInfo to store original values
+    const originalGetVisitorInfo = getVisitorInfo;
+    getVisitorInfo = async function() {
+        const result = await originalGetVisitorInfo();
+        
+        // Setup reveal icons after getting visitor info
+        ipRevealIcon.addEventListener('click', () => {
+            ipRevealIcon.dataset.masked = toggleReveal(
+                ipAddressElement, 
+                ipRevealIcon, 
+                originalIP, 
+                ipRevealIcon.textContent === 'visibility_off'
+            );
+        });
+
+        locationRevealIcon.addEventListener('click', () => {
+            locationRevealIcon.dataset.masked = toggleReveal(
+                locationInfoElement, 
+                locationRevealIcon, 
+                originalLocation, 
+                locationRevealIcon.textContent === 'visibility_off'
+            );
+        });
+
+        return result;
+    };
+
     initializeDialogs();
 });

@@ -1092,7 +1092,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .info-item {
-    text-align: center;
+    text-align: left;
     padding: 10px;
     background: rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(255, 0, 0, 0.2);
@@ -2437,4 +2437,22 @@ body::-webkit-scrollbar-thumb {
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
+}
+
+.info-value-container {
+    display: flex;
+    align-items: center;
+}
+
+.reveal-icon {
+    color: #ff4444;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 18px;
+    vertical-align: middle;
+    transition: color 0.3s ease;
+}
+
+.reveal-icon:hover {
+    color: #ff6666;
 }
