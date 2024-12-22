@@ -781,52 +781,53 @@ body::-webkit-scrollbar-thumb {
 .visitor-info {
     margin-top: max(30px, 6vh);
     margin-bottom: max(30px, 6vh);
+    width: 100%;
+    max-width: 100vw;
 }
 
-.section-title {
-    font-family: 'Press Start 2P', sans-serif;
-    font-size: clamp(0.8rem, 1.5vw + 0.2rem, 1.2rem);
-    color: #ff0000;
-    margin-bottom: 15px;
-    text-align: center;
-    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
-    position: relative;
-    white-space: nowrap;
+.info-section {
+    width: 100%;
+    max-width: 100vw;
+    padding: 0 15px;
     overflow: hidden;
 }
 
-.section-title::after {
-    content: " 👾"; /* Restored emoji */
-    font-size: 0.9em;
-}
-
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 0, 0, 0.3);
-    border-radius: 10px;
-}
-
-.info-item {
-    text-align: center;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 0, 0, 0.2);
-    border-radius: 8px;
-}
-
-.info-label {
-    color: #00ff00;
-    font-size: 0.9em;
-    margin-bottom: 5px;
-}
-
-.info-value {
+.visitor-info .section-title {
     color: #ff0000;
-    font-size: 0.85em;
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    text-align: center;
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+    white-space: nowrap;
+}
+
+.visitor-info .section-title::after {
+    content: "👾";
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .visitor-info .section-title {
+        font-size: 0.85em;
+    }
+}
+
+@media (max-width: 480px) {
+    .visitor-info .section-title {
+        font-size: 0.65em;
+    }
+}
+
+@media (max-width: 320px) {
+    .visitor-info .section-title {
+        font-size: 0.55em;
+    }
 }
 
 .terminal {
@@ -1117,7 +1118,6 @@ body::-webkit-scrollbar-thumb {
     position: relative;
     font-family: 'Press Start 2P', monospace;
     font-size: 1em;
-    display: inline-block;
 }
 
 .footer .heart {
@@ -1746,26 +1746,22 @@ body::-webkit-scrollbar-thumb {
     color: #ff0000;
     font-size: 1.2em;
     margin-bottom: 15px;
-    text-align: center;
+    text-align: left;
     white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
 @media (max-width: 480px) {
     .section-title {
-        font-size: 0.85em;
+        font-size: 1em;
     }
 }
 
 @media (max-width: 380px) {
     .section-title {
-        font-size: 0.75em;
-    }
-}
-
-@media (max-width: 320px) {
-    .section-title {
-        font-size: 0.65em;
+        font-size: 0.85em;
     }
 }
 
@@ -1828,5 +1824,30 @@ body::-webkit-scrollbar-thumb {
     }
     100% {
         transform: translateX(100%) rotate(25deg);
+    }
+}
+
+.section-title {
+    color: #00ff00;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 380px) {
+    .section-title {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 320px) {
+    .section-title {
+        font-size: 0.9em;
     }
 }
