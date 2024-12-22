@@ -913,15 +913,32 @@ body::-webkit-scrollbar-thumb {
     white-space: nowrap;
     font-size: 0.7em;
     z-index: 1000;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .footer .dev-link {
-    color: #ff0000;
+    background: linear-gradient(90deg, 
+        #800000 0%,
+        #800000 35%,
+        #ff0000 50%,
+        #800000 65%,
+        #800000 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 1.5s linear infinite;
     text-decoration: none;
     position: relative;
     font-family: 'Press Start 2P', monospace;
-    font-size: 0.7em;
-    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+    font-size: 1em;
+    display: inline-block;
+}
+
+.footer .heart {
+    color: #ff0000;
+    text-shadow: 0 0 2px rgba(255, 0, 0, 0.3);
 }
 
 .terminal-container {
@@ -1608,5 +1625,14 @@ body::-webkit-scrollbar-thumb {
                      0 0 20px #ff0000,
                      0 0 30px #ff0000,
                      0 0 40px #ff0000;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 100% center;
+    }
+    100% {
+        background-position: -100% center;
     }
 }
