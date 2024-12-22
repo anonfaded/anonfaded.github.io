@@ -206,20 +206,20 @@ document.addEventListener('DOMContentLoaded', () => {
         hexBinaryContainer.className = 'hex-binary-container';
         terminalOutput.appendChild(hexBinaryContainer);
         
-        // Function to update hex/binary and scroll
+        // Function to update hex/binary
         function updateHexBinary() {
             const { hex, binary } = generateRandomHexBinary();
             hexBinaryContainer.innerHTML = `
                 <div class="text-red">HEX: ${hex}</div>
                 <div class="text-green">BIN: ${binary}</div>
             `;
-            terminalOutput.scrollTop = terminalOutput.scrollHeight;
         }
         
-        // Initial update
+        // Initial update and scroll to bottom once
         updateHexBinary();
+        terminalOutput.scrollTop = terminalOutput.scrollHeight;
         
-        // Update hex/binary display every 100ms
+        // Update hex/binary display every 100ms without forcing scroll
         setInterval(updateHexBinary, 100);
     }
 
