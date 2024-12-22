@@ -17,7 +17,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,45 +38,61 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 40px;
+    width: 100%;
+    max-width: 800px;
+    min-height: 100vh;
+    justify-content: center;
 }
 
 .scan-messages {
     position: relative;
-    height: 80px;
+    padding: 40px 20px;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 140px;
+    margin-bottom: 20px;
 }
 
 .scan-text {
     color: #00ff00;
     font-size: 1.2em;
     text-shadow: 0 0 5px #00ff00;
-    margin-bottom: 15px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.scan-status, .scan-error {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 600px;
+    color: #ff0000;
+    font-size: 1.4em;
+    text-shadow: 0 0 8px #ff0000;
+    text-align: center;
+    padding: 15px 20px;
 }
 
 .scan-status {
-    color: #ff0000;
-    font-size: 1.4em;
-    text-shadow: 0 0 8px #ff0000;
+    top: 0;
     animation: pulseText 2s infinite;
-    text-align: center;
-    width: 100%;
 }
 
 .scan-error {
-    color: #ff0000;
-    font-size: 1.4em;
-    text-shadow: 0 0 8px #ff0000;
-    animation: glitchText 0.3s infinite;
+    bottom: 0;
+    animation: glitchText 0.8s infinite;
 }
 
 .scan-progress {
     width: 80%;
-    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px 20px;
     position: relative;
 }
 
@@ -87,6 +103,7 @@ body {
     position: relative;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+    margin-top: 40px;
 }
 
 .progress-fill {
@@ -102,13 +119,20 @@ body {
 
 .progress-text {
     position: absolute;
-    top: -35px;
+    top: 0;
     left: 50%;
     transform: translateX(-50%);
     color: #ff0000;
     font-family: 'Share Tech Mono', monospace;
     font-size: 1.5em;
     text-shadow: 0 0 5px #ff0000;
+    transition: all 0.3s ease;
+}
+
+.progress-text[data-progress="100"] {
+    font-size: 3em;
+    text-shadow: 0 0 15px #ff0000;
+    animation: explodeText 0.5s forwards;
 }
 
 .fingerprint-scanner {
@@ -120,11 +144,26 @@ body {
     border-radius: 50%;
     border: 1px solid rgba(0, 255, 0, 0.2);
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
-    transition: transform 0.3s ease-out;
 }
 
 .scanner-prompt.scanning .fingerprint-scanner {
-    transform: scale(1.2);
+    animation: scannerPulse 0.05s ease-in-out infinite alternate;
+}
+
+.scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #00ff00;
+    opacity: 0;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+.scanner-prompt.scanning .scan-line {
+    opacity: 0.5;
+    animation: scanLine 0.5s linear infinite;
 }
 
 .scan-glow {
@@ -190,36 +229,49 @@ body {
 
 .scanner-prompt.scanning {
     animation: panicShake 0.05s ease-in-out infinite;
-    transform-origin: center center;
 }
 
-@keyframes panicShake {
-    0% { transform: translate(-2px, -2px) rotate(-0.5deg); }
-    25% { transform: translate(3px, 1px) rotate(0.5deg); }
-    50% { transform: translate(-1px, -3px) rotate(-0.5deg); }
-    75% { transform: translate(2px, 2px) rotate(0.5deg); }
-    100% { transform: translate(-2px, -2px) rotate(-0.5deg); }
+.fingerprint-burst {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
 }
 
-@keyframes drawLine {
-    0% {
-        opacity: 0;
-        stroke-dashoffset: 100;
-    }
-    20% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 1;
-        stroke-dashoffset: 0;
-    }
-    80% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 0;
-        stroke-dashoffset: -100;
-    }
+.burst-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.burst-fingerprint {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #ff0000;
+    border-radius: 50%;
+    opacity: 0;
+    animation: burstAnim 0.5s ease-out forwards;
+}
+
+.burst-line {
+    position: absolute;
+    background: #ff0000;
+    height: 2px;
+    width: 20px;
+    transform-origin: center;
+    opacity: 0;
+}
+
+.fingerprint-burst.active .burst-line {
+    animation: burstLine 0.8s ease-out forwards;
+}
+
+.fingerprint-scanner.bursting .fingerprint-lines path {
+    animation: pathBurst 1s ease-out forwards;
 }
 
 .warning-title {
@@ -437,6 +489,55 @@ body {
     display: none !important;
 }
 
+@keyframes scannerPulse {
+    0% {
+        transform: scale(0.96) rotate(-0.5deg);
+    }
+    100% {
+        transform: scale(1.04) rotate(0.5deg);
+    }
+}
+
+@keyframes panicShake {
+    0% { transform: translate(-2px, -2px) rotate(-0.5deg); }
+    25% { transform: translate(3px, 1px) rotate(0.5deg); }
+    50% { transform: translate(-1px, -3px) rotate(-0.5deg); }
+    75% { transform: translate(2px, 2px) rotate(0.5deg); }
+    100% { transform: translate(-2px, -2px) rotate(-0.5deg); }
+}
+
+@keyframes burstAnim {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes drawLine {
+    0% {
+        opacity: 0;
+        stroke-dashoffset: 100;
+    }
+    20% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+        stroke-dashoffset: 0;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+        stroke-dashoffset: -100;
+    }
+}
+
 @keyframes glitch {
     2%, 64% { transform: translate(2px,0) skew(0deg); }
     4%, 60% { transform: translate(-2px,0) skew(0deg); }
@@ -444,17 +545,38 @@ body {
 }
 
 @keyframes scanLine {
-    0% { top: 0; }
-    100% { top: 100%; }
+    0% {
+        top: 0;
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.5;
+    }
+    90% {
+        opacity: 0.5;
+    }
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
 }
 
 @keyframes glitchText {
-    0% { transform: translateX(-50%) skew(0deg); }
-    20% { transform: translateX(-52%) skew(-2deg); }
-    40% { transform: translateX(-48%) skew(2deg); }
-    60% { transform: translateX(-52%) skew(-1deg); }
-    80% { transform: translateX(-48%) skew(1deg); }
-    100% { transform: translateX(-50%) skew(0deg); }
+    0% {
+        transform: translateX(-50%) skew(0deg);
+    }
+    20% {
+        transform: translateX(-52%) skew(2deg);
+    }
+    40% {
+        transform: translateX(-48%) skew(-2deg);
+    }
+    60% {
+        transform: translateX(-50%) skew(0deg);
+    }
+    100% {
+        transform: translateX(-50%) skew(0deg);
+    }
 }
 
 @keyframes pulseText {
@@ -484,5 +606,44 @@ body {
     }
     100% {
         stroke-dashoffset: 0;
+    }
+}
+
+@keyframes explodeText {
+    0% {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(-50%) scale(1.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-50%) scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes burstLine {
+    0% {
+        opacity: 1;
+        transform: scale(1) rotate(var(--rotation));
+    }
+    100% {
+        opacity: 0;
+        transform: scale(20) rotate(var(--rotation));
+    }
+}
+
+@keyframes pathBurst {
+    0% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        stroke-dashoffset: 100;
+        opacity: 0;
+        transform: scale(2) translate(var(--tx), var(--ty));
     }
 }

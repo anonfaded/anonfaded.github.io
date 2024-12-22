@@ -15,21 +15,53 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressText = document.querySelector('.progress-text');
     const scanError = document.querySelector('.scan-error');
     const scanStatus = document.querySelector('.scan-status');
-    const successAnimation = document.querySelector('.fingerprint-success');
+    const burstContainer = document.querySelector('.burst-container');
     
-    // Handle fingerprint scan
     let scanTimeout;
     let progressInterval;
     let progress = 0;
     let isScanning = false;
-    const SCAN_DURATION = 3000; // 3 seconds to complete
-    const PROGRESS_STEP = 100 / (SCAN_DURATION / 20); // Update every 20ms
+    const SCAN_DURATION = 3000;
+    const PROGRESS_STEP = 100 / (SCAN_DURATION / 20);
+
+    function createBurst() {
+        // Create burst lines
+        for(let i = 0; i < 20; i++) {
+            const line = document.createElement('div');
+            line.className = 'burst-line';
+            const angle = (i / 20) * 360;
+            line.style.setProperty('--rotation', `${angle}deg`);
+            line.style.left = '50%';
+            line.style.top = '50%';
+            line.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+            burstContainer.appendChild(line);
+        }
+
+        // Animate fingerprint paths
+        const paths = document.querySelectorAll('.fingerprint-lines path');
+        paths.forEach(path => {
+            const tx = (Math.random() - 0.5) * 100;
+            const ty = (Math.random() - 0.5) * 100;
+            path.style.setProperty('--tx', `${tx}%`);
+            path.style.setProperty('--ty', `${ty}%`);
+        });
+    }
 
     function setProgress(percent) {
         progressFill.style.width = `${percent}%`;
         const displayText = `${Math.round(percent)}%`;
         progressText.textContent = displayText;
         progressText.setAttribute('data-text', displayText);
+        progressText.setAttribute('data-progress', Math.round(percent));
+
+        if (percent >= 100) {
+            document.querySelector('.fingerprint-scanner').classList.add('bursting');
+            document.querySelector('.fingerprint-burst').classList.add('active');
+            setTimeout(() => {
+                scannerContainer.classList.add('hidden');
+                mainContainer.classList.remove('hidden');
+            }, 1500);
+        }
     }
 
     function startScan(e) {
@@ -74,10 +106,12 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(progressInterval);
         clearTimeout(scanTimeout);
         scanner.classList.remove('scanning');
-        successAnimation.classList.remove('hidden');
+        document.querySelector('.fingerprint-burst').classList.remove('hidden');
+        createBurst();
         
         setTimeout(() => {
-            successAnimation.classList.add('hidden');
+            document.querySelector('.fingerprint-burst').classList.add('hidden');
+            burstContainer.innerHTML = '';
             scannerContainer.classList.add('hidden');
             mainContainer.classList.remove('hidden');
             startHacking();

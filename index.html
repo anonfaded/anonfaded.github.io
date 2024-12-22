@@ -17,26 +17,22 @@
     <div id="scanner-container" class="scanner-container">
         <div class="scanner-prompt">
             <div class="scan-messages">
-                <div class="scan-text">Place Finger to Begin</div>
                 <div class="scan-status">Don't be scared, I won't bite! 😈</div>
-                <div class="scan-error hidden">Whoops! Getting cold feet? 🥶</div>
+                <div class="scan-error hidden">Tsk tsk... losing your nerve?</div>
             </div>
             
             <div class="scan-progress">
+                <div class="progress-text glitch-text" data-text="0%">0%</div>
                 <div class="progress-bar">
                     <div class="progress-fill"></div>
                 </div>
-                <div class="progress-text glitch-text" data-text="0%">0%</div>
             </div>
 
             <div class="fingerprint-scanner">
+                <div class="scan-line"></div>
                 <div class="scan-glow"></div>
                 <svg class="fingerprint-svg" viewBox="0 0 100 100">
                     <defs>
-                        <linearGradient id="fingerprint-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" style="stop-color:#00ff00;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#00ff00;stop-opacity:0.5" />
-                        </linearGradient>
                         <pattern id="fingerprint-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
                             <path d="M0,10 Q5,0 10,10 T20,10" fill="none" stroke="currentColor" stroke-width="0.5"/>
                             <path d="M0,5 Q5,-5 10,5 T20,5" fill="none" stroke="currentColor" stroke-width="0.5"/>
@@ -56,6 +52,12 @@
                     </g>
                 </svg>
             </div>
+
+            <div class="scan-text">Enter your fingerprint to get access to fadedhood</div>
+        </div>
+
+        <div class="fingerprint-burst hidden">
+            <div class="burst-container"></div>
         </div>
     </div>
 
