@@ -296,5 +296,82 @@ document.addEventListener('DOMContentLoaded', () => {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    // Custom Context Menu
+    const contextMenu = document.querySelector('.custom-context-menu');
+    const contextMenuItems = document.querySelectorAll('.context-menu-item');
+
+    document.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        
+        const { clientX: mouseX, clientY: mouseY } = e;
+        const { innerWidth: winWidth, innerHeight: winHeight } = window;
+        
+        // Get menu dimensions
+        const menuWidth = contextMenu.offsetWidth;
+        const menuHeight = contextMenu.offsetHeight;
+        
+        // Calculate position to keep menu in viewport
+        let x = mouseX;
+        let y = mouseY;
+        
+        if (mouseX + menuWidth > winWidth) {
+            x = mouseX - menuWidth;
+        }
+        
+        if (mouseY + menuHeight > winHeight) {
+            y = mouseY - menuHeight;
+        }
+        
+        contextMenu.style.left = `${x}px`;
+        contextMenu.style.top = `${y}px`;
+        contextMenu.classList.add('active');
+    });
+
+    document.addEventListener('click', () => {
+        contextMenu.classList.remove('active');
+    });
+
+    // Handle menu item clicks with sarcastic responses
+    contextMenuItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            const action = e.currentTarget.getAttribute('data-action');
+            let message = '';
+            
+            switch(action) {
+                case 'hack':
+                    message = "Nice try, but I'm unhackable! 😈";
+                    break;
+                case 'inspect':
+                    message = "404: Secret code not found! 🕵️‍♂️";
+                    break;
+                case 'copy':
+                    message = "Copying is futile, resistance is not! 🚫";
+                    break;
+                case 'report':
+                    message = "Your bug report has been sent to /dev/null 🗑️";
+                    break;
+                case 'exit':
+                    message = "You can check out any time you like, but you can never leave! 🏨";
+                    break;
+            }
+            
+            // Create and show notification
+            const notification = document.createElement('div');
+            notification.className = 'hacker-notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Trigger reflow for animation
+            notification.offsetHeight;
+            notification.classList.add('active');
+            
+            // Remove notification after animation
+            setTimeout(() => {
+                notification.classList.remove('active');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        });
+    });
+
     initializeDialogs();
 });
