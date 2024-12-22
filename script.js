@@ -186,10 +186,10 @@ document.addEventListener('DOMContentLoaded', () => {
         await typeTextToTerminal('Initializing system scan...', 'text-green');
         await sleep(1000);
         
-        await typeTextToTerminal(`Target IP: ${visitorInfo.ip}`, 'text-cyan');
+        await typeTextToTerminal(`Target IP: ${maskIP(visitorInfo.ip)}`, 'text-cyan');
         await sleep(500);
         
-        await typeTextToTerminal(`Location: ${visitorInfo.location.city}, ${visitorInfo.location.country_name}`, 'text-cyan');
+        await typeTextToTerminal(`Location: ${maskLocation(visitorInfo.location.city, visitorInfo.location.country_name)}`, 'text-cyan');
         await sleep(500);
         
         await typeTextToTerminal(`Browser: ${navigator.userAgent}`, 'text-cyan');
