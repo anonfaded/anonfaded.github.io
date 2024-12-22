@@ -11,21 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const scanner = document.querySelector('.scanner-prompt');
     const scannerContainer = document.getElementById('scanner-container');
     const mainContainer = document.getElementById('main-container');
-    const terminalOutput = document.getElementById('terminalOutput');
-    const progressCircle = document.querySelector('.progress-ring-circle');
+    const progressFill = document.querySelector('.progress-fill');
     const progressText = document.querySelector('.progress-text');
     const scanError = document.querySelector('.scan-error');
     const scanStatus = document.querySelector('.scan-status');
     const successAnimation = document.querySelector('.fingerprint-success');
     
-    // Calculate progress circle circumference
-    const radius = progressCircle.r.baseVal.value;
-    const circumference = radius * 2 * Math.PI;
-    progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
-    
-    // Disable text selection
-    document.addEventListener('selectstart', e => e.preventDefault());
-
     // Handle fingerprint scan
     let scanTimeout;
     let progressInterval;
@@ -35,17 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const PROGRESS_STEP = 100 / (SCAN_DURATION / 20); // Update every 20ms
 
     function setProgress(percent) {
-        const offset = circumference - (percent / 100 * circumference);
-        progressCircle.style.strokeDashoffset = offset;
-        progressText.textContent = `${Math.round(percent)}%`;
-
-        // Update shake intensity based on progress
-        if (isScanning) {
-            const scale = 1 + (percent / 100) * 0.2; // Scale from 1 to 1.2
-            const intensity = 1 + (percent / 100) * 2; // Shake intensity increases
-            scanner.style.transform = `scale(${scale})`;
-            scanner.style.animation = `panicShake 0.${Math.max(1, 10 - Math.floor(percent/10))}s ease-in-out infinite`;
-        }
+        progressFill.style.width = `${percent}%`;
+        const displayText = `${Math.round(percent)}%`;
+        progressText.textContent = displayText;
+        progressText.setAttribute('data-text', displayText);
     }
 
     function startScan(e) {
@@ -75,8 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         isScanning = false;
         scanner.classList.remove('scanning');
-        scanner.style.transform = '';
-        scanner.style.animation = '';
         clearTimeout(scanTimeout);
         clearInterval(progressInterval);
         
@@ -92,8 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(progressInterval);
         clearTimeout(scanTimeout);
         scanner.classList.remove('scanning');
-        scanner.style.transform = '';
-        scanner.style.animation = '';
         successAnimation.classList.remove('hidden');
         
         setTimeout(() => {

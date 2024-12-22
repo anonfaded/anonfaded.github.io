@@ -35,244 +35,191 @@ body {
     text-align: center;
     padding: 20px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
 }
 
-.fingerprint-scanner {
-    width: 200px;
-    height: 200px;
+.scan-messages {
     position: relative;
-    margin: 0 auto;
-}
-
-.fingerprint-svg {
+    height: 80px;
     width: 100%;
-    height: 100%;
-}
-
-.scanner-ring {
-    fill: none;
-    stroke: #00ff00;
-    stroke-width: 2;
-}
-
-.scanner-circle {
-    fill: rgba(0, 255, 0, 0.1);
-    stroke: #00ff00;
-    stroke-width: 1;
-}
-
-.fingerprint-path {
-    fill: none;
-    stroke: #00ff00;
-    stroke-width: 1;
-    stroke-dasharray: 100;
-    stroke-dashoffset: 100;
-    animation: drawFingerprint 3s linear infinite;
-}
-
-.fingerprint-line {
-    fill: none;
-    stroke: #00ff00;
-    stroke-width: 0.5;
-    stroke-dasharray: 100;
-    stroke-dashoffset: 100;
-    animation: drawFingerprint 3s linear infinite;
-}
-
-.scan-line {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: #00ff00;
-    animation: scanLine 2s linear infinite;
-    opacity: 0;
-}
-
-.scanner-prompt.scanning .scan-line {
-    opacity: 1;
-}
-
-.scanner-prompt.scanning .fingerprint-path,
-.scanner-prompt.scanning .fingerprint-line {
-    stroke: #ff0000;
-    animation: none;
-    stroke-dashoffset: 0;
-}
-
-.scanner-prompt.scanning .scanner-ring {
-    stroke: #ff0000;
-    filter: drop-shadow(0 0 5px #ff0000);
-}
-
-.scanner-prompt.scanning .scanner-circle {
-    fill: rgba(255, 0, 0, 0.1);
-    stroke: #ff0000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .scan-text {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    text-align: center;
-    bottom: -50px;
     color: #00ff00;
     font-size: 1.2em;
     text-shadow: 0 0 5px #00ff00;
+    margin-bottom: 15px;
 }
 
 .scan-status {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    text-align: center;
-    bottom: -90px;
     color: #ff0000;
     font-size: 1.4em;
     text-shadow: 0 0 8px #ff0000;
     animation: pulseText 2s infinite;
+    text-align: center;
+    width: 100%;
 }
 
 .scan-error {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    text-align: center;
-    bottom: -90px;
     color: #ff0000;
     font-size: 1.4em;
     text-shadow: 0 0 8px #ff0000;
     animation: glitchText 0.3s infinite;
 }
 
-.scanner-prompt.scanning {
-    animation: panicShake 0.1s ease-in-out infinite;
-    transform-origin: center center;
-}
-
-.progress-ring {
+.scan-progress {
+    width: 80%;
+    padding: 20px;
     position: relative;
-    width: 100%;
-    height: 100%;
 }
 
-.progress-ring svg {
-    width: 100%;
-    height: 100%;
-    transform: rotate(-90deg);
+.progress-bar {
+    height: 10px;
+    background: rgba(255, 0, 0, 0.2);
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
 }
 
-.progress-ring-circle {
-    fill: none;
-    stroke: #00ff00;
-    stroke-width: 2;
-    stroke-dasharray: 283;
-    stroke-dashoffset: 283;
-    transition: stroke-dashoffset 0.1s linear;
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ff0000, #ff3333);
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: width 0.05s linear;
+    box-shadow: 0 0 20px #ff0000;
 }
 
 .progress-text {
     position: absolute;
-    top: 50%;
+    top: -35px;
     left: 50%;
-    transform: translate(-50%, -50%);
-    color: #00ff00;
-    font-size: 1.2em;
-    text-shadow: 0 0 5px #00ff00;
-}
-
-.scanner-prompt.scanning .progress-ring-circle {
-    stroke: #ff0000;
-}
-
-.scanner-prompt.scanning .progress-text {
+    transform: translateX(-50%);
     color: #ff0000;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.5em;
     text-shadow: 0 0 5px #ff0000;
 }
 
-.fingerprint-success {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1001;
-    background: rgba(0, 0, 0, 0.9);
+.fingerprint-scanner {
+    width: 250px;
+    height: 250px;
+    position: relative;
+    margin: 0 auto;
+    background: rgba(0, 255, 0, 0.05);
+    border-radius: 50%;
+    border: 1px solid rgba(0, 255, 0, 0.2);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+    transition: transform 0.3s ease-out;
 }
 
-.success-lines {
+.scanner-prompt.scanning .fingerprint-scanner {
+    transform: scale(1.2);
+}
+
+.scan-glow {
     position: absolute;
-    top: 50%;
+    bottom: 0;
     left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px;
-    height: 200px;
-}
-
-.success-lines::before {
-    content: '';
-    position: absolute;
+    transform: translateX(-50%);
     width: 100%;
     height: 100%;
-    background: 
-        radial-gradient(circle at center, transparent 30%, #00ff00 31%, transparent 32%),
-        repeating-linear-gradient(0deg, transparent, transparent 2px, #00ff00 3px, transparent 4px);
-    animation: disperseLines 1s ease-out forwards;
+    background: radial-gradient(circle, rgba(255,0,0,0.2) 0%, rgba(255,0,0,0.1) 50%, transparent 70%);
+    filter: blur(10px);
+    pointer-events: none;
     opacity: 0;
+    transition: opacity 0.3s;
 }
 
-@keyframes disperseLines {
-    0% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(3);
-    }
+.scanner-prompt.scanning .scan-glow {
+    opacity: 1;
 }
 
-@keyframes scanLine {
-    0% { top: 0; }
-    100% { top: 100%; }
+.fingerprint-svg {
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
 }
 
-@keyframes drawFingerprint {
-    0% { stroke-dashoffset: 100; }
-    100% { stroke-dashoffset: -100; }
+.fingerprint-base {
+    fill: none;
+    stroke: #00ff00;
+    stroke-width: 0.5;
+    opacity: 0.3;
 }
 
-@keyframes glitch {
-    2%, 64% { transform: translate(2px,0) skew(0deg); }
-    4%, 60% { transform: translate(-2px,0) skew(0deg); }
-    62% { transform: translate(0,0) skew(5deg); }
+.fingerprint-lines path {
+    fill: none;
+    stroke: #00ff00;
+    stroke-width: 0.5;
+    opacity: 0;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: drawLine 3s infinite;
+}
+
+.scanner-prompt.scanning .fingerprint-base {
+    stroke: #ff0000;
+}
+
+.scanner-prompt.scanning .fingerprint-lines path {
+    stroke: #ff0000;
+    animation: none;
+    opacity: 1;
+    stroke-dashoffset: 0;
+}
+
+.fingerprint-lines path:nth-child(1) { animation-delay: 0s; }
+.fingerprint-lines path:nth-child(2) { animation-delay: 0.2s; }
+.fingerprint-lines path:nth-child(3) { animation-delay: 0.4s; }
+.fingerprint-lines path:nth-child(4) { animation-delay: 0.6s; }
+.fingerprint-lines path:nth-child(5) { animation-delay: 0.8s; }
+.fingerprint-lines path:nth-child(6) { animation-delay: 1s; }
+.fingerprint-lines path:nth-child(7) { animation-delay: 1.2s; }
+.fingerprint-lines path:nth-child(8) { animation-delay: 1.4s; }
+
+.scanner-prompt.scanning {
+    animation: panicShake 0.05s ease-in-out infinite;
+    transform-origin: center center;
 }
 
 @keyframes panicShake {
-    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-    25% { transform: translate(-2px, 2px) scale(1.02) rotate(-1deg); }
-    50% { transform: translate(2px, -2px) scale(1.05) rotate(1deg); }
-    75% { transform: translate(-2px, -2px) scale(1.08) rotate(-1deg); }
-    100% { transform: translate(0, 0) scale(1.1) rotate(0deg); }
+    0% { transform: translate(-2px, -2px) rotate(-0.5deg); }
+    25% { transform: translate(3px, 1px) rotate(0.5deg); }
+    50% { transform: translate(-1px, -3px) rotate(-0.5deg); }
+    75% { transform: translate(2px, 2px) rotate(0.5deg); }
+    100% { transform: translate(-2px, -2px) rotate(-0.5deg); }
 }
 
-@keyframes pulseText {
-    0% { transform: translateX(-50%) scale(1); text-shadow: 0 0 8px #ff0000; }
-    50% { transform: translateX(-50%) scale(1.05); text-shadow: 0 0 15px #ff0000; }
-    100% { transform: translateX(-50%) scale(1); text-shadow: 0 0 8px #ff0000; }
-}
-
-@keyframes glitchText {
-    0% { transform: translateX(-50%) skew(0deg); }
-    20% { transform: translateX(-52%) skew(-2deg); }
-    40% { transform: translateX(-48%) skew(2deg); }
-    60% { transform: translateX(-52%) skew(-1deg); }
-    80% { transform: translateX(-48%) skew(1deg); }
-    100% { transform: translateX(-50%) skew(0deg); }
+@keyframes drawLine {
+    0% {
+        opacity: 0;
+        stroke-dashoffset: 100;
+    }
+    20% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+        stroke-dashoffset: 0;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+        stroke-dashoffset: -100;
+    }
 }
 
 .warning-title {
@@ -452,7 +399,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgE1xQAAAABh0Uk5TzD7qJvlB1T0E2UjIFqgzENAojwvhBgMAAAB9SURBVDjLY2BgYGAwFmBgYGBgWADEDCwKDAwsE4BYgKGBgYGzAYiBWICBgWkoEAuwMDAwsAoxMLAwMDAwHwZiAZYGBgbmAiAWYGJgYGCcwMDAzMDAwLwYiAVYGxgYmCYwMDAzMDAwbwBiARYBBgZmAQYGZgYGBuYJQAwAQlQxwa2gtp8AAAAASUVORK5CYII=');
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgE1xQAAAABh0Uk5TzD7qJvlB1T0E2UjIFqgzENAojwvhBgMAAAB9SURBVDjLY2BgYGAwFmBgYGBgWADEDCwKDAwsE4BYgKGBgYGzAYiBWICBgWkoEAuwMDAwsAoxMLAwMDAwHwZiAZYGBgbmAQYGZgYGBuYJQAwAQlQxwa2gtp8AAAAASUVORK5CYII=');
     opacity: 0.3;
     pointer-events: none;
 }
@@ -488,4 +435,54 @@ body {
 
 .hidden {
     display: none !important;
+}
+
+@keyframes glitch {
+    2%, 64% { transform: translate(2px,0) skew(0deg); }
+    4%, 60% { transform: translate(-2px,0) skew(0deg); }
+    62% { transform: translate(0,0) skew(5deg); }
+}
+
+@keyframes scanLine {
+    0% { top: 0; }
+    100% { top: 100%; }
+}
+
+@keyframes glitchText {
+    0% { transform: translateX(-50%) skew(0deg); }
+    20% { transform: translateX(-52%) skew(-2deg); }
+    40% { transform: translateX(-48%) skew(2deg); }
+    60% { transform: translateX(-52%) skew(-1deg); }
+    80% { transform: translateX(-48%) skew(1deg); }
+    100% { transform: translateX(-50%) skew(0deg); }
+}
+
+@keyframes pulseText {
+    0% { transform: translateX(-50%) scale(1); text-shadow: 0 0 8px #ff0000; }
+    50% { transform: translateX(-50%) scale(1.05); text-shadow: 0 0 15px #ff0000; }
+    100% { transform: translateX(-50%) scale(1); text-shadow: 0 0 8px #ff0000; }
+}
+
+@keyframes successBurst {
+    0% {
+        opacity: 1;
+        transform: scale(0.1) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(2) rotate(180deg);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(3) rotate(360deg);
+    }
+}
+
+@keyframes drawFingerprint {
+    0% {
+        stroke-dashoffset: 500;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
 }
