@@ -75,11 +75,21 @@ body::-webkit-scrollbar-thumb {
     margin-bottom: 50px;
     line-height: 1.5;
     max-width: 95%;
-    padding: 0 5px;
+    padding: 0 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.scan-text .shimmer-text,
+.scan-text .faded-text {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .scan-text .shimmer-text {
@@ -96,7 +106,6 @@ body::-webkit-scrollbar-thumb {
     -webkit-text-fill-color: transparent;
     animation: shimmer 3s linear infinite;
     text-shadow: 0 0 2px rgba(0, 255, 0, 0.3);
-    white-space: nowrap;
 }
 
 .scan-text .faded-text {
@@ -113,14 +122,42 @@ body::-webkit-scrollbar-thumb {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 98%;
-    max-width: 600px;
+    width: 90%;
+    max-width: 500px;
     color: #ff0000;
     font-size: 1em;
     text-shadow: 0 0 8px #ff0000;
     text-align: center;
-    padding: 8px 5px;
-    line-height: 1.2;
+    padding: 8px 15px;
+    line-height: 1.4;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    box-sizing: border-box;
+}
+
+@media (max-width: 500px) {
+    .scan-status, .scan-error {
+        width: 85%;
+        font-size: 0.9em;
+        padding: 6px 12px;
+    }
+    .scan-text {
+        padding: 0 12px;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .scan-status, .scan-error {
+        width: 82%;
+        font-size: 0.85em;
+        padding: 5px 10px;
+    }
+    .scan-text {
+        padding: 0 10px;
+        font-size: 0.95em;
+    }
 }
 
 .progress-container {
