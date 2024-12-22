@@ -380,6 +380,7 @@ body::-webkit-scrollbar-thumb {
     color: #ff0000;
     margin-bottom: 10px;
     text-align: center;
+    animation: warningGlow 2s infinite alternate;
 }
 
 .warning-text, .warning-subtext {
@@ -421,6 +422,7 @@ body::-webkit-scrollbar-thumb {
     font-size: 1.5em;
     margin-bottom: 15px;
     text-shadow: 0 0 10px #ff0000;
+    animation: warningGlow 2s infinite alternate;
 }
 
 .warning-text {
@@ -807,8 +809,8 @@ body::-webkit-scrollbar-thumb {
     height: 120px;
     border-radius: 50%;
     position: relative;
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
-    animation: avatarGlow 3s infinite alternate ease-in-out;
+    border: 2px solid #ff0000;
+    animation: avatarGlow 3s infinite alternate;
 }
 
 .avatar-glow {
@@ -847,15 +849,15 @@ body::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.9);
     padding: 8px 25px;
     text-align: center;
-    border: 1px solid rgba(255, 0, 0, 0.3);
+    border: 1px solid #ff0000;
     border-radius: 15px;
     backdrop-filter: blur(10px);
     z-index: 1000;
     font-family: 'Share Tech Mono', monospace;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
     max-width: 80%;
     width: auto;
     font-size: 0.9em;
+    animation: footerGlow 3s infinite alternate;
 }
 
 .footer .heart {
@@ -932,6 +934,56 @@ body::-webkit-scrollbar-thumb {
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
+}
+
+@keyframes warningGlow {
+    0% {
+        text-shadow: 0 0 5px #ff0000,
+                     0 0 10px #ff0000,
+                     0 0 15px #ff0000;
+    }
+    100% {
+        text-shadow: 0 0 10px #ff0000,
+                     0 0 20px #ff0000,
+                     0 0 30px #ff0000,
+                     0 0 40px #ff0000;
+    }
+}
+
+@keyframes avatarGlow {
+    0% {
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.6),
+                    0 0 40px rgba(255, 0, 0, 0.4),
+                    inset 0 0 20px rgba(255, 0, 0, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 35px rgba(255, 0, 0, 0.8),
+                    0 0 60px rgba(255, 0, 0, 0.6),
+                    inset 0 0 30px rgba(255, 0, 0, 0.7);
+    }
+    100% {
+        box-shadow: 0 0 50px rgba(255, 0, 0, 1),
+                    0 0 80px rgba(255, 0, 0, 0.8),
+                    inset 0 0 40px rgba(255, 0, 0, 0.9);
+    }
+}
+
+@keyframes footerGlow {
+    0% {
+        box-shadow: 0 0 5px rgba(255, 0, 0, 0.1),
+                    0 0 10px rgba(255, 0, 0, 0.05);
+        border-color: rgba(255, 0, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.2),
+                    0 0 20px rgba(255, 0, 0, 0.1);
+        border-color: rgba(255, 0, 0, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.3),
+                    0 0 30px rgba(255, 0, 0, 0.15);
+        border-color: rgba(255, 0, 0, 0.5);
+    }
 }
 
 @media (max-width: 768px) {
