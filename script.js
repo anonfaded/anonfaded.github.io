@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isScanning = true;
         scanner.classList.add('scanning');
         scanError.classList.add('hidden');
-        scanStatus.textContent = "Almost there... Keep holding! ";
+        scanStatus.textContent = "Almost there... Keep holding! 😈 🔥";
         progress = 0;
         setProgress(0);
         
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (progress < 100) {
             scanError.classList.remove('hidden');
-            scanStatus.textContent = "Don't be scared, I won't bite! ";
+            scanStatus.textContent = "Don't be scared, I won't bite! 😈 🩸";
             progress = 0;
             setProgress(0);
         }
