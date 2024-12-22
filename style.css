@@ -1214,3 +1214,39 @@ body::-webkit-scrollbar-thumb {
 .hidden {
     display: none !important;
 }
+
+.text-green {
+    color: #00ff00;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.text-cyan {
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff;
+}
+
+.blink {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 49% {
+        opacity: 1;
+    }
+    50%, 100% {
+        opacity: 0;
+    }
+}
+
+.hex-binary-container {
+    margin-top: 10px;
+    font-family: 'Share Tech Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hex-binary-container span {
+    font-size: 14px;
+    letter-spacing: 2px;
+}

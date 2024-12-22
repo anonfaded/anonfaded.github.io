@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isScanning = true;
         scanner.classList.add('scanning');
         scanError.classList.add('hidden');
-        scanStatus.textContent = "Almost there... Keep holding! 😰";
+        scanStatus.textContent = "Almost there... Keep holding! ";
         progress = 0;
         setProgress(0);
         
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (progress < 100) {
             scanError.classList.remove('hidden');
-            scanStatus.textContent = "Don't be scared, I won't bite! 😈";
+            scanStatus.textContent = "Don't be scared, I won't bite! ";
             progress = 0;
             setProgress(0);
         }
@@ -157,55 +157,62 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    async function getRandomDadJoke() {
-        try {
-            const response = await fetch('https://icanhazdadjoke.com/', {
-                headers: { 'Accept': 'application/json' }
-            });
-            const data = await response.json();
-            document.getElementById('randomJoke').textContent = data.joke;
-        } catch (error) {
-            console.error('Error fetching joke:', error);
+    function generateRandomHexBinary() {
+        const hexChars = '0123456789ABCDEF';
+        const binaryChars = '01';
+        let hex = '';
+        let binary = '';
+        
+        // Generate 16 hex characters
+        for (let i = 0; i < 16; i++) {
+            hex += hexChars[Math.floor(Math.random() * hexChars.length)];
         }
+        
+        // Generate 32 binary characters
+        for (let i = 0; i < 32; i++) {
+            binary += binaryChars[Math.floor(Math.random() * binaryChars.length)];
+        }
+        
+        return { hex, binary };
     }
 
     async function startHacking() {
-        const commands = [
-            { text: '> Initializing system breach...', delay: 100 }, 
-            { text: '> Bypassing security protocols...', delay: 100 }, 
-            { text: '> Accessing network configuration...', delay: 100 }, 
-            { text: '> Intercepting data streams...', delay: 167 },  
-            { text: '> Scanning for vulnerabilities...', delay: 100 }, 
-            { text: '> Target system identified!', delay: 100 } 
-        ];
-
-        for (const cmd of commands) {
-            await typeTextToTerminal(cmd.text, 'info');
-            await sleep(cmd.delay);
-        }
-
         const visitorInfo = await getVisitorInfo();
-        await sleep(167); 
         
-        if (visitorInfo) {
-            await typeTextToTerminal(`> IP Address located: ${maskIP(visitorInfo.ip)}`, 'success');
-            await sleep(100); 
-            await typeTextToTerminal(`> Location triangulated: ${maskLocation(visitorInfo.location.city, visitorInfo.location.country_name)}`, 'success');
-            await sleep(100); 
-        }
+        // Clear existing content
+        terminalOutput.innerHTML = '';
         
-        await typeTextToTerminal('> Analyzing system environment...', 'info');
-        await sleep(167); 
+        // Type each line with appropriate styling
+        await typeTextToTerminal('Initializing system scan...', 'text-green');
+        await sleep(1000);
         
-        await typeTextToTerminal(`> Browser fingerprint: ${navigator.userAgent}`, 'error');
-        await sleep(100); 
-        await typeTextToTerminal(`> Operating system: ${navigator.platform}`, 'error');
-        await sleep(100); 
-        await typeTextToTerminal(`> System language: ${navigator.language}`, 'error');
-        await sleep(167); 
+        await typeTextToTerminal(`Target IP: ${visitorInfo.ip}`, 'text-cyan');
+        await sleep(500);
         
-        await typeTextToTerminal('> Hack complete! System compromised! 😈', 'warning');
-        getRandomDadJoke();
+        await typeTextToTerminal(`Location: ${visitorInfo.location.city}, ${visitorInfo.location.country_name}`, 'text-cyan');
+        await sleep(500);
+        
+        await typeTextToTerminal(`Browser: ${navigator.userAgent}`, 'text-cyan');
+        await sleep(500);
+        
+        await typeTextToTerminal(`System: ${navigator.platform} - ${navigator.language}`, 'text-cyan');
+        await sleep(1000);
+        
+        await typeTextToTerminal('ACCESS GRANTED', 'text-green blink');
+        
+        // Create and append hex/binary display container
+        const hexBinaryContainer = document.createElement('div');
+        hexBinaryContainer.className = 'hex-binary-container';
+        terminalOutput.appendChild(hexBinaryContainer);
+        
+        // Update hex/binary display every 100ms
+        setInterval(() => {
+            const { hex, binary } = generateRandomHexBinary();
+            hexBinaryContainer.innerHTML = `
+                <span class="text-cyan">HEX: ${hex}</span>
+                <span class="text-green">BIN: ${binary}</span>
+            `;
+        }, 100);
     }
 
     async function typeTextToTerminal(text, className = '') {
