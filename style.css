@@ -70,38 +70,41 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 200px;
+    height: 240px;
     margin-bottom: 20px;
 }
 
 .scan-text {
     color: #00ff00;
-    font-size: 0.6em;
+    font-size: 1.4em;
     text-shadow: 0 0 5px #00ff00;
     margin-top: 20px;
     text-align: center;
+    line-height: 1.4;
+    max-width: 90%;
 }
 
 .scan-status, .scan-error {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 100%;
+    width: 95%;
     max-width: 600px;
     color: #ff0000;
-    font-size: 0.7em;
+    font-size: 1.2em;
     text-shadow: 0 0 8px #ff0000;
     text-align: center;
-    padding: 15px 20px;
+    padding: 10px 10px;
+    line-height: 1.2;
 }
 
 .scan-status {
-    top: 20px;
+    top: 15px;
     animation: pulseText 2s infinite;
 }
 
 .scan-error {
-    bottom: 20px;
+    bottom: 15px;
     animation: glitchText 0.8s infinite;
 }
 
@@ -136,7 +139,7 @@ body::-webkit-scrollbar-thumb {
 
 .progress-text {
     font-family: 'Press Start 2P', monospace;
-    font-size: clamp(1rem, 2vw + 0.2rem, 1.5rem);
+    font-size: clamp(2.5rem, 5vw + 1rem, 4rem);
     position: absolute;
     top: 0;
     left: 50%;
@@ -147,7 +150,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .progress-text[data-progress="100"] {
-    font-size: clamp(1.2rem, 2.5vw + 0.3rem, 2rem);
+    font-size: clamp(3rem, 6vw + 1.2rem, 5rem);
     text-shadow: 0 0 20px #ff0000;
     animation: explodeText 0.5s forwards;
 }
@@ -1034,6 +1037,136 @@ body::-webkit-scrollbar-thumb {
     .fingerprint-scanner {
         width: 150px;
         height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .scan-messages {
+        height: 220px;
+        padding: 50px 15px;
+    }
+
+    .scan-text {
+        font-size: 1.2em;
+        margin-top: 15px;
+    }
+
+    .scan-status, .scan-error {
+        font-size: 1.4em;
+        width: 95%;
+        padding: 12px 15px;
+    }
+
+    .progress-text {
+        font-size: clamp(2rem, 4vw + 0.8rem, 3.5rem);
+    }
+
+    .progress-text[data-progress="100"] {
+        font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+    }
+}
+
+@media (max-width: 320px) {
+    .scan-messages {
+        height: 200px;
+        padding: 40px 12px;
+    }
+
+    .scan-text {
+        font-size: 1.1em;
+    }
+
+    .scan-status, .scan-error {
+        font-size: 1.3em;
+        padding: 10px;
+    }
+
+    .progress-text {
+        font-size: clamp(1.8rem, 3.5vw + 0.7rem, 3rem);
+    }
+
+    .progress-text[data-progress="100"] {
+        font-size: clamp(2.2rem, 4.5vw + 0.9rem, 4rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .scan-messages {
+        height: 220px;
+        padding: 40px 10px;
+    }
+
+    .scan-text {
+        font-size: 1.2em;
+        margin-top: 15px;
+        line-height: 1.3;
+    }
+
+    .scan-status, .scan-error {
+        font-size: 0.95em;
+        width: 98%;
+        padding: 6px 8px;
+        line-height: 1.2;
+    }
+
+    .scan-status {
+        top: 10px;
+    }
+
+    .scan-error {
+        bottom: 10px;
+    }
+}
+
+@media (max-width: 380px) {
+    .scan-messages {
+        height: 200px;
+        padding: 35px 8px;
+    }
+
+    .scan-text {
+        font-size: 1.1em;
+        line-height: 1.2;
+    }
+
+    .scan-status, .scan-error {
+        font-size: 0.85em;
+        padding: 5px 6px;
+        line-height: 1.1;
+    }
+
+    .scan-status {
+        top: 8px;
+    }
+
+    .scan-error {
+        bottom: 8px;
+    }
+}
+
+@media (max-width: 320px) {
+    .scan-messages {
+        height: 180px;
+        padding: 30px 6px;
+    }
+
+    .scan-text {
+        font-size: 1em;
+        line-height: 1.2;
+    }
+
+    .scan-status, .scan-error {
+        font-size: 0.8em;
+        padding: 4px 5px;
+        line-height: 1.1;
+    }
+
+    .scan-status {
+        top: 6px;
+    }
+
+    .scan-error {
+        bottom: 6px;
     }
 }
 
