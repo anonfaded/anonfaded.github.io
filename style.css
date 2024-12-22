@@ -891,6 +891,111 @@ body::-webkit-scrollbar-thumb {
     gap: 4px;
 }
 
+.scanner-arrows {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.arrow-container {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.arrow-container.left {
+    right: calc(100% + 10px);
+}
+
+.arrow-container.right {
+    left: calc(100% + 10px);
+}
+
+.arrow {
+    color: #00ff00;
+    font-size: 1.2em;
+    text-shadow: 0 0 5px #00ff00;
+    opacity: 0;
+}
+
+.arrow-container.left .arrow:nth-child(1) {
+    animation: fadeArrowLeft 2s infinite;
+}
+
+.arrow-container.left .arrow:nth-child(2) {
+    animation: fadeArrowLeft 2s infinite 0.3s;
+}
+
+.arrow-container.left .arrow:nth-child(3) {
+    animation: fadeArrowLeft 2s infinite 0.6s;
+}
+
+.arrow-container.right .arrow:nth-child(1) {
+    animation: fadeArrowRight 2s infinite;
+}
+
+.arrow-container.right .arrow:nth-child(2) {
+    animation: fadeArrowRight 2s infinite 0.3s;
+}
+
+.arrow-container.right .arrow:nth-child(3) {
+    animation: fadeArrowRight 2s infinite 0.6s;
+}
+
+@keyframes fadeArrowLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+}
+
+@keyframes fadeArrowRight {
+    0% {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+}
+
+@media (max-width: 480px) {
+    .arrow {
+        font-size: 1em;
+    }
+    
+    .arrow-container.left {
+        right: calc(100% + 5px);
+    }
+    
+    .arrow-container.right {
+        left: calc(100% + 5px);
+    }
+}
+
+@media (max-width: 320px) {
+    .arrow {
+        font-size: 0.9em;
+    }
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 10px;
@@ -1031,7 +1136,7 @@ body::-webkit-scrollbar-thumb {
     }
 
     .scan-status, .scan-error {
-        font-size: 0.55em;
+        font-size: 0.8em;
     }
 
     .fingerprint-scanner {
